@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class Registro extends StatelessWidget {
+class Registro extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return RegistroState();
+  }
+}
+
+class RegistroState extends State<Registro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,5 +82,4 @@ class Registro extends StatelessWidget {
       ),)
     );
   }
-
 }
