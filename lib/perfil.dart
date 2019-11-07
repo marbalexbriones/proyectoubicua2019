@@ -73,9 +73,7 @@ class PerfilState extends State<Perfil> {
             expandedHeight: 200.0,
 
             actions: <Widget>[
-              IconButton(icon: Icon(Icons.save), onPressed: () {},
-
-              )
+              IconButton(icon: Icon(Icons.save), onPressed: () {},)
             ],
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
@@ -164,7 +162,7 @@ class PerfilState extends State<Perfil> {
                           child: TextFormField(
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
-                              labelText: "Comeentarios"
+                              labelText: "Comentarios"
                             ),
                             obscureText: true,
                           ),
@@ -206,4 +204,8 @@ class PerfilState extends State<Perfil> {
       ),
     );
   }
+}
+
+class CustomBottonNavigationBar extends BottomNavigationBar {
+   
 }
