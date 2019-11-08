@@ -72,7 +72,7 @@ class LoginState extends State<Login> {
               ButtonBar(
                 OutlineButton(
                   borderSide: BorderSide(
-                    color: col_white,
+                    color: Colors.white,
                     width: 0.0,
                   ),
                   shape: StadiumBorder(),
