@@ -3,6 +3,7 @@ import 'package:proyectoubicua2019/registro.dart';
 import 'package:proyectoubicua2019/perfil.dart';
 import 'package:proyectoubicua2019/splash.dart';
 import 'package:proyectoubicua2019/colors.dart';
+import 'package:proyectoubicua2019/aviso.dart';
 import 'package:proyectoubicua2019/login.dart';
 
 void main() => runApp(MyApp());
@@ -68,6 +69,10 @@ class _MyHomePageState extends State<MyHomePage> {
             RaisedButton(
               child: Text("Login"),
               onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));},
+            ),
+            RaisedButton(
+              child: Text("Aviso"),
+              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Aviso()));},
             )
           ],
         ),
