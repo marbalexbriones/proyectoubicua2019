@@ -17,10 +17,9 @@ class LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
+      body: 
+      Container(
           child: ListView(
-            scrollDirection: Axis.horizontal,
             shrinkWrap: true,
             children: <Widget>[
               Image.asset(
@@ -32,9 +31,8 @@ class LoginState extends State<Login> {
               Center(
                   child: Text(
                 "Iniciar Sesión",
-                style: TextStyle(color: col_blue_gray, fontSize: 30),
+                style: TextStyle(color: col_blue_gray, fontSize: 30, fontFamily: 'GoogleSans'),
               )),
-              SizedBox(height: 5.0),
               Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 8.0),
                 child: TextFormField(
@@ -57,8 +55,6 @@ class LoginState extends State<Login> {
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: 'Contraseña:',
-                    focusColor: col_primary,
-                    hoverColor: col_primary,
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
@@ -70,38 +66,11 @@ class LoginState extends State<Login> {
                   },
                 ),
               ),
-              OutlineButton(
-                borderSide: BorderSide(
-                  color: Colors.white,
-                  width: 0.0,
-                ),
-                shape: StadiumBorder(),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Splash()),
-                  );
-                },
-                child: Text(
-                  'Olvidé mi contraseña',
-                  style: TextStyle(fontSize: 12, color: Colors.cyan),
-                ),
-              ),
-              RaisedButton(
-                color: col_primary,
-                shape: StadiumBorder(),
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Splash()),
-                  );
-                },
-                child: Text('Iniciar'),
+              ButtonBar(
+                
               ),
             ],
           ),
-        ),
       ),
     );
   }
