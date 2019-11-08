@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:proyectoubicua2019/registro.dart';
 import 'package:proyectoubicua2019/perfil.dart';
+import 'package:proyectoubicua2019/splash.dart';
+import 'package:proyectoubicua2019/colors.dart';
+import 'package:proyectoubicua2019/login.dart';
 
 void main() => runApp(MyApp());
 
@@ -57,6 +60,14 @@ class _MyHomePageState extends State<MyHomePage> {
             RaisedButton(
               child: Text("Perfil"),
               onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));},
+            ),
+            RaisedButton(
+              child: Text("Splash Screen"),
+              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Splash()));},
+            ),
+            RaisedButton(
+              child: Text("Login"),
+              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));},
             )
           ],
         ),
