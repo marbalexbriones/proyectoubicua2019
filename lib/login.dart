@@ -3,6 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:proyectoubicua2019/colors.dart';
 import 'package:proyectoubicua2019/splash.dart';
 
+import 'colors.dart';
+import 'splash.dart';
+
 class Login extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -67,7 +70,35 @@ class LoginState extends State<Login> {
                 ),
               ),
               ButtonBar(
-                
+                OutlineButton(
+                  borderSide: BorderSide(
+                    color: col_white,
+                    width: 0.0,
+                  ),
+                  shape: StadiumBorder(),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Splash()),
+                    );
+                  },
+                  child: Text(
+                    'Olvidé mi contraseña',
+                    style: TextStyle(fontSize: 15, color: Colors.cyan),
+                  ),
+                ),
+                RaisedButton(
+                  color: col_primary,
+                  shape: StadiumBorder(),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Splash()),
+                    );
+                  },
+                  child: Text('Iniciar Sesión'),
+                ),
               ),
             ],
           ),
