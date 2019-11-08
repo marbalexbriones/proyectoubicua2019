@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:proyectoubicua2019/Recuperar.dart';
 import 'package:proyectoubicua2019/colors.dart';
 import 'package:proyectoubicua2019/splash.dart';
 
@@ -98,7 +99,7 @@ class LoginState extends State<Login> {
                     Navigator.pop(context);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Splash()),
+                      MaterialPageRoute(builder: (context) => Recuperar()),
                     );
                   },
                   child: Text('Iniciar Sesión'),

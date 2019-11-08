@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyectoubicua2019/Recuperar.dart';
 import 'package:proyectoubicua2019/registro.dart';
 import 'package:proyectoubicua2019/perfil.dart';
 import 'package:proyectoubicua2019/splash.dart';
@@ -73,6 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
             RaisedButton(
               child: Text("Aviso"),
               onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Aviso()));},
+            ),
+            RaisedButton(
+              child: Text("Recuperar"),
+              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Recuperar()));},
             )
           ],
         ),
