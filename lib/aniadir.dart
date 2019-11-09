@@ -55,7 +55,11 @@ class AniadirState extends State<Aniadir> {
                             ),
                           ),
                         ),
-                        Container(
+                       
+                        Row(
+                      children: <Widget>[
+                        Expanded(
+                          child:  Container(
                           padding: EdgeInsets.only(bottom: 10.0),
 
                           child: TextFormField(
@@ -68,8 +72,11 @@ class AniadirState extends State<Aniadir> {
                           
                           
                         ),
-                        Container(
-                          padding: EdgeInsets.only(bottom: 10.0),
+
+                        ),
+                        Expanded(
+                          child:  Container(
+                          padding: EdgeInsets.only(bottom: 10.0,left: 10.0),
 
                           child: TextFormField(
                             decoration: InputDecoration(
@@ -81,6 +88,10 @@ class AniadirState extends State<Aniadir> {
                           
                           
                         ),
+
+                        ),
+                      ],
+                    ),
                         Container(
                           padding: EdgeInsets.only(bottom: 10.0),
                           child: TextFormField(

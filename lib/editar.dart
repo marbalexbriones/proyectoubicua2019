@@ -55,7 +55,10 @@ class EditarState extends State<Editar> {
                             ),
                           ),
                         ),
-                        Container(
+                        Row(
+                      children: <Widget>[
+                        Expanded(
+                          child:  Container(
                           padding: EdgeInsets.only(bottom: 10.0),
 
                           child: TextFormField(
@@ -68,8 +71,11 @@ class EditarState extends State<Editar> {
                           
                           
                         ),
-                        Container(
-                          padding: EdgeInsets.only(bottom: 10.0),
+
+                        ),
+                        Expanded(
+                          child:  Container(
+                          padding: EdgeInsets.only(bottom: 10.0,left: 10.0),
 
                           child: TextFormField(
                             decoration: InputDecoration(
@@ -81,6 +87,10 @@ class EditarState extends State<Editar> {
                           
                           
                         ),
+
+                        ),
+                      ],
+                    ),
                         Container(
                           padding: EdgeInsets.only(bottom: 10.0),
                           child: TextFormField(
