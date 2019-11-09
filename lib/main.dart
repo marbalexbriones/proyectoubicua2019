@@ -6,6 +6,10 @@ import 'package:proyectoubicua2019/splash.dart';
 import 'package:proyectoubicua2019/colors.dart';
 import 'package:proyectoubicua2019/aviso.dart';
 import 'package:proyectoubicua2019/login.dart';
+import 'package:proyectoubicua2019/aniadir.dart';
+import 'package:proyectoubicua2019/editar.dart';
+import 'package:proyectoubicua2019/AcercaDe.dart';
+import 'package:proyectoubicua2019/Ayuda.dart';
 
 void main() => runApp(MyApp());
 
@@ -78,7 +82,23 @@ class _MyHomePageState extends State<MyHomePage> {
             RaisedButton(
               child: Text("Recuperar"),
               onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Recuperar()));},
-            )
+            ),
+            RaisedButton(
+              child: Text("Aniadir"),
+              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Aniadir()));},
+            ),
+            RaisedButton(
+              child: Text("Editar"),
+              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Editar()));},
+            ),
+            RaisedButton(
+              child: Text("Acerca"),
+              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Acerca()));},
+            ),
+             RaisedButton(
+              child: Text("Ayuda"),
+              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Ayuda()));},
+            ),
           ],
         ),
       ),
