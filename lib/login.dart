@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proyectoubicua2019/Recuperar.dart';
 import 'package:proyectoubicua2019/colors.dart';
+import 'package:proyectoubicua2019/registro.dart';
 import 'package:proyectoubicua2019/splash.dart';
 
 import 'colors.dart';
@@ -28,8 +29,8 @@ class LoginState extends State<Login> {
             children: <Widget>[
               Image.asset(
                 "assets/images/logo.png",
-                width: 200,
-                height: 200,
+                width: 150,
+                height: 150,
               ),
               SizedBox(height: 5.0),
               Center(
@@ -37,7 +38,7 @@ class LoginState extends State<Login> {
                 "Iniciar Sesión",
                 style: TextStyle(
                     color: col_blue_gray,
-                    fontSize: 30,
+                    fontSize: 25,
                     fontFamily: 'GoogleSans'),
               )),
               Padding(
@@ -45,6 +46,7 @@ class LoginState extends State<Login> {
                 child: TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Nombre de Usuario:',
+                    labelStyle: TextStyle(fontFamily: "GoogleSans"),
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
@@ -62,6 +64,7 @@ class LoginState extends State<Login> {
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: 'Contraseña:',
+                    labelStyle: TextStyle(fontFamily: "GoogleSans"),
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
@@ -73,36 +76,65 @@ class LoginState extends State<Login> {
                   },
                 ),
               ),
-              OutlineButton(
-                borderSide: BorderSide(
-                  color: Colors.white,
-                  width: 0.0,
-                ),
-                shape: StadiumBorder(),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Splash()),
-                  );
-                },
-                child: Text(
-                  'Olvidé mi contraseña',
-                  style: TextStyle(fontSize: 15, color: Colors.cyan),
+              new SizedBox(height: 5.0),
+              Padding(
+                padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
+                child: MaterialButton(
+                  minWidth: 100.0,
+                  height: 40.0,
+                  elevation: 5,
+                  onPressed: () {},
+                  color: col_primary,
+                  child: Text(
+                    'Enviar',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
-                child: RaisedButton(
-                  color: col_primary,
+                child: OutlineButton(
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                    width: 0.0,
+                  ),
                   shape: StadiumBorder(),
                   onPressed: () {
-                    Navigator.pop(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Recuperar()),
                     );
                   },
-                  child: Text('Iniciar Sesión'),
+                  child: Text(
+                    'Olvidé mi contraseña',
+                    style: TextStyle(fontSize: 15, color: col_primary),
+                  ),
+                ),
+              ),
+              new SizedBox(height: 90.0),
+              Padding(
+                padding: EdgeInsets.fromLTRB(75.0, 0.0, 75.0, 0.0),
+                child: Row(
+                  children: <Widget>[
+                    Text("¿Aún no tienes cuenta?"),
+                    OutlineButton(
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 0.0,
+                      ),
+                      shape: StadiumBorder(),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Registro()),
+                        );
+                      },
+                      child: Text(
+                        'Registrate',
+                        style: TextStyle(fontSize: 15, color: col_primary),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
