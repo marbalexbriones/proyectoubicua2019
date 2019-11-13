@@ -31,7 +31,10 @@ class Recuperar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text("Recuperar Contraseña",
-                style: TextStyle(fontSize: 25, color: col_blue_gray, fontFamily: "GoogleSans")),
+                style: TextStyle(
+                    fontSize: 25,
+                    color: col_blue_gray,
+                    fontFamily: "GoogleSans")),
             Text(
               "Se enviara un correo para cambiar tu contraseña",
               style: TextStyle(color: col_blue_gray, fontFamily: "GoogleSans"),
@@ -39,13 +42,11 @@ class Recuperar extends StatelessWidget {
             Container(
               width: 300,
               child: TextFormField(
-                decoration: InputDecoration(
-                    labelText: "Email",
-                    labelStyle: TextStyle(color: col_primary, fontFamily: "GoogleSans"),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: col_primary))),
-                style: TextStyle(color: Colors.black),
-              ),
+                  decoration: InputDecoration(
+                    labelText: 'Email:',
+                    labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                  ),
+                ),
             ),
             new SizedBox(height: 5.0),
             Container(
