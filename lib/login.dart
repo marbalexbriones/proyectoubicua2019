@@ -3,10 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:proyectoubicua2019/Recuperar.dart';
 import 'package:proyectoubicua2019/colors.dart';
 import 'package:proyectoubicua2019/registro.dart';
-import 'package:proyectoubicua2019/splash.dart';
+import 'package:proyectoubicua2019/inicio.dart';
 
 import 'colors.dart';
-import 'splash.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -83,10 +82,16 @@ class LoginState extends State<Login> {
                   minWidth: 100.0,
                   height: 40.0,
                   elevation: 5,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Inicio()),
+                    );
+                  },
                   color: col_primary,
                   child: Text(
-                    'Enviar',
+                    'Acceder',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
