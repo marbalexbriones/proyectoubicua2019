@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'colors.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(new pastillaap());
 
-class MyApp extends StatelessWidget {
+class pastillaap extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Pastilla App',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
