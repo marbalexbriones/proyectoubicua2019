@@ -3,7 +3,6 @@ import 'package:splashscreen/splashscreen.dart';
 import 'package:proyectoubicua2019/Recuperar.dart';
 import 'package:proyectoubicua2019/registro.dart';
 import 'package:proyectoubicua2019/perfil.dart';
-import 'package:proyectoubicua2019/splash.dart';
 import 'package:proyectoubicua2019/colors.dart';
 import 'package:proyectoubicua2019/aviso.dart';
 import 'package:proyectoubicua2019/login.dart';
@@ -12,7 +11,6 @@ import 'package:proyectoubicua2019/editar.dart';
 import 'package:proyectoubicua2019/AcercaDe.dart';
 import 'package:proyectoubicua2019/Ayuda.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:splashscreen/splashscreen.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -76,13 +74,6 @@ class Main extends StatelessWidget {
             },
           ),
           RaisedButton(
-            child: Text("Splash Screen"),
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Splash()));
-            },
-          ),
-          RaisedButton(
             child: Text("Login"),
             onPressed: () {
               Navigator.push(
@@ -136,6 +127,34 @@ class Main extends StatelessWidget {
     );
   }
 }
+
+
+class PastillAppNavBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new BottomNavigationBar(
+      backgroundColor: col_light_gray,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            title: Text('Perfil'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.alarm),
+            title: Text('Alarmas'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.contact_phone),
+            title: Text('Directorio'),
+          ),
+        ],
+        //currentIndex: _selectedIndex,
+        selectedItemColor: Colors.cyan,
+        //onTap: _onItemTapped,
+      );
+  }
+}
+
 /*import 'package:flutter/material.dart';
 
 

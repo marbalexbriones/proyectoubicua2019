@@ -12,7 +12,7 @@ class pastillaap extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'PastillaApp'),
+      home: new MyHomePage(title: 'Inicio'),
     );
   }
 }

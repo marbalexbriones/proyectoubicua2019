@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proyectoubicua2019/colors.dart';
-import 'package:proyectoubicua2019/splash.dart';
 
 class Registro extends StatefulWidget {
   @override
