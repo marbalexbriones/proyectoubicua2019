@@ -9,8 +9,8 @@ import 'package:proyectoubicua2019/model/usuario_model.dart';
 
 class PastilleroDataBaseProvider{
   PastilleroDataBaseProvider._();
-  static final PastilleroDataBaseProvider db = PastilleroDataBaseProvider._();
 
+  static final PastilleroDataBaseProvider db = PastilleroDataBaseProvider._();
   Database _database;
 
   //para evitar que abra varias conexciones una y otra vez podemos usar algo como esto..
@@ -37,12 +37,11 @@ class PastilleroDataBaseProvider{
         "unit TEXT,"
         "frequency TEXT,"
         "quantityAva TEXT,"
-        "indication TEXT,"
-        "foreign key(idUser) references User(idUser)"
+        "indication TEXT"
         ")";
         
     _database = await getDatabaseInstanace(pathU,queryU);
-    _database = await getDatabaseInstanace(pathR,queryR);
+    /*_database = await getDatabaseInstanace(pathR,queryR);*/
     return _database;
   }
 
@@ -87,6 +86,7 @@ class PastilleroDataBaseProvider{
     return response.isNotEmpty ? Reminder.fromMap(response.first) : null;
   }
 
+
  //Insert user
   addUserToDatabase(User user) async {
     final db = await database;
@@ -117,6 +117,47 @@ class PastilleroDataBaseProvider{
 
   }
 
+    //Elimina todos los usuarios
+    deleteAllUser() async {
+    final db = await database;
+    db.delete("User");
+  } 
+
+  // Elimina usuario por id
+   deleteUserWithId(int id) async {
+    final db = await database;
+    return db.delete("User", where: "idUser = ?", whereArgs: [id]);
+  } 
+
+   //Elimina todos los reminder
+    deleteAllReminder() async {
+    final db = await database;
+    db.delete("Reminder");
+  } 
+
+  // Elimina reminder por id
+   deleteReminderWithId(int id) async {
+    final db = await database;
+    return db.delete("Reminder", where: "idReminder = ?", whereArgs: [id]);
+  } 
+
+  
+  //Update
+  updateUser(User user) async {
+    final db = await database;
+    var response = await db.update("User", user.toMap(),
+    where: "idUser = ?", whereArgs: [user.idUser]);
+    return response;
+  }
+
+
+  //Update
+  updateReminder(Reminder reminder) async {
+    final db = await database;
+    var response = await db.update("Reminder", reminder.toMap(),
+    where: "idReminder = ?", whereArgs: [reminder.idReminder]);
+    return response;
+  }
   
 
 
