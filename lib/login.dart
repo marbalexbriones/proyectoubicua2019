@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:proyectoubicua2019/PruebasBaseDatos/pruebaDB.dart';
 import 'package:proyectoubicua2019/Recuperar.dart';
 import 'package:proyectoubicua2019/colors.dart';
 import 'package:proyectoubicua2019/registro.dart';
@@ -92,6 +93,26 @@ class LoginState extends State<Login> {
                   color: col_primary,
                   child: Text(
                     'Acceder',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
+                child: MaterialButton(
+                  minWidth: 100.0,
+                  height: 40.0,
+                  elevation: 5,
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Prueba()),
+                    );
+                  },
+                  color: col_primary,
+                  child: Text(
+                    'Prueba',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

@@ -15,42 +15,44 @@ class PastilleroDataBaseProvider{
 
   //para evitar que abra varias conexciones una y otra vez podemos usar algo como esto..
   Future<Database> get database async {
-    if(_database != null) return _database;
-    String pathU = "user.db";
-    String pathR = "reminder.db";
+    if(_database != null) {
+      return _database;
+    }
+    String pathR = "database.db";
+    String queryR = "CREATE TABLE Reminder ("
+      "idReminder integer primary key,"
+      "idUser integer,"
+      "medicine TEXT,"
+      "quantity TEXT,"
+      "unit TEXT,"
+      "frequency TEXT,"
+      "quantityAva TEXT,"
+      "indication TEXT"
+    ")";
     String queryU = "CREATE TABLE User ("
-        "idUser integer primary key,"
-        "name TEXT,"
-        "lname TEXT,"
-        "email TEXT,"
-        "password TEXT,"
-        "mobile TEXT,"
-        "sex TEXT,"
-        "age TEXT,"
-        "comments TEXT"
-        ")";
-     String queryR = "CREATE TABLE Reminder ("
-        "idReminder integer primary key,"
-        "idUser integer,"
-        "medicine TEXT,"
-        "quantity TEXT,"
-        "unit TEXT,"
-        "frequency TEXT,"
-        "quantityAva TEXT,"
-        "indication TEXT"
-        ")";
-        
-    _database = await getDatabaseInstanace(pathU,queryU);
-    /*_database = await getDatabaseInstanace(pathR,queryR);*/
+      "idUser integer primary key,"
+      "name TEXT,"
+      "lname TEXT,"
+      "email TEXT,"
+      "password TEXT,"
+      "mobile TEXT,"
+      "sex TEXT,"
+      "age TEXT,"
+      "comments TEXT"
+      ")";
+    _database = await getDatabaseInstanace(pathR, queryR, queryU);
     return _database;
   }
 
-  Future<Database> getDatabaseInstanace(String pathA, String query) async {
+  Future<Database> getDatabaseInstanace(String pathA, String query, String query2) async {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = join(directory.path, pathA);
-     return await openDatabase(path, version: 1,
+    return await openDatabase(
+      path, 
+      version: 1,
       onCreate: (Database db, int version) async {
         await db.execute(query);
+        await db.execute(query2);
       });
   }
 
@@ -158,9 +160,4 @@ class PastilleroDataBaseProvider{
     where: "idReminder = ?", whereArgs: [reminder.idReminder]);
     return response;
   }
-  
-
-
-
-
 }
