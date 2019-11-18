@@ -59,7 +59,7 @@ class LoginState extends State<Login> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
+                padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 50.0),
                 child: TextFormField(
                   obscureText: true,
                   decoration: InputDecoration(
@@ -76,7 +76,6 @@ class LoginState extends State<Login> {
                   },
                 ),
               ),
-              new SizedBox(height: 5.0),
               Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
                 child: MaterialButton(
@@ -84,7 +83,6 @@ class LoginState extends State<Login> {
                   height: 40.0,
                   elevation: 5,
                   onPressed: () {
-                    Navigator.pop(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Inicio()),
@@ -98,13 +96,12 @@ class LoginState extends State<Login> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
+                padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 50.0),
                 child: MaterialButton(
                   minWidth: 100.0,
                   height: 40.0,
                   elevation: 5,
                   onPressed: () {
-                    Navigator.pop(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Prueba()),
@@ -137,10 +134,10 @@ class LoginState extends State<Login> {
                   ),
                 ),
               ),
-              new SizedBox(height: 90.0),
               Padding(
-                padding: EdgeInsets.fromLTRB(75.0, 0.0, 75.0, 0.0),
+                padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Text("¿Aún no tienes cuenta?"),
                     OutlineButton(
