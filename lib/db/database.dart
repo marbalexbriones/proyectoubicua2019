@@ -9,49 +9,50 @@ import 'package:proyectoubicua2019/model/usuario_model.dart';
 
 class PastilleroDataBaseProvider{
   PastilleroDataBaseProvider._();
-  static final PastilleroDataBaseProvider db = PastilleroDataBaseProvider._();
 
+  static final PastilleroDataBaseProvider db = PastilleroDataBaseProvider._();
   Database _database;
 
   //para evitar que abra varias conexciones una y otra vez podemos usar algo como esto..
   Future<Database> get database async {
-    if(_database != null) return _database;
-    String pathU = "user.db";
-    String pathR = "reminder.db";
+    if(_database != null) {
+      return _database;
+    }
+    String pathR = "database.db";
+    String queryR = "CREATE TABLE Reminder ("
+      "idReminder integer primary key,"
+      "idUser integer,"
+      "medicine TEXT,"
+      "quantity TEXT,"
+      "unit TEXT,"
+      "frequency TEXT,"
+      "quantityAva TEXT,"
+      "indication TEXT"
+    ")";
     String queryU = "CREATE TABLE User ("
-        "idUser integer primary key,"
-        "name TEXT,"
-        "lname TEXT,"
-        "email TEXT,"
-        "password TEXT,"
-        "mobile TEXT,"
-        "sex TEXT,"
-        "age TEXT,"
-        "comments TEXT"
-        ")";
-     String queryR = "CREATE TABLE Reminder ("
-        "idReminder integer primary key,"
-        "idUser integer,"
-        "medicine TEXT,"
-        "quantity TEXT,"
-        "unit TEXT,"
-        "frequency TEXT,"
-        "quantityAva TEXT,"
-        "indication TEXT,"
-        "foreign key(idUser) references User(idUser)"
-        ")";
-        
-    _database = await getDatabaseInstanace(pathU,queryU);
-    _database = await getDatabaseInstanace(pathR,queryR);
+      "idUser integer primary key,"
+      "name TEXT,"
+      "lname TEXT,"
+      "email TEXT,"
+      "password TEXT,"
+      "mobile TEXT,"
+      "sex TEXT,"
+      "age TEXT,"
+      "comments TEXT"
+      ")";
+    _database = await getDatabaseInstanace(pathR, queryR, queryU);
     return _database;
   }
 
-  Future<Database> getDatabaseInstanace(String pathA, String query) async {
+  Future<Database> getDatabaseInstanace(String pathA, String query, String query2) async {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = join(directory.path, pathA);
-     return await openDatabase(path, version: 1,
+    return await openDatabase(
+      path, 
+      version: 1,
       onCreate: (Database db, int version) async {
         await db.execute(query);
+        await db.execute(query2);
       });
   }
 
@@ -87,6 +88,7 @@ class PastilleroDataBaseProvider{
     return response.isNotEmpty ? Reminder.fromMap(response.first) : null;
   }
 
+
  //Insert user
   addUserToDatabase(User user) async {
     final db = await database;
@@ -117,9 +119,45 @@ class PastilleroDataBaseProvider{
 
   }
 
+    //Elimina todos los usuarios
+    deleteAllUser() async {
+    final db = await database;
+    db.delete("User");
+  } 
+
+  // Elimina usuario por id
+   deleteUserWithId(int id) async {
+    final db = await database;
+    return db.delete("User", where: "idUser = ?", whereArgs: [id]);
+  } 
+
+   //Elimina todos los reminder
+    deleteAllReminder() async {
+    final db = await database;
+    db.delete("Reminder");
+  } 
+
+  // Elimina reminder por id
+   deleteReminderWithId(int id) async {
+    final db = await database;
+    return db.delete("Reminder", where: "idReminder = ?", whereArgs: [id]);
+  } 
+
   
+  //Update
+  updateUser(User user) async {
+    final db = await database;
+    var response = await db.update("User", user.toMap(),
+    where: "idUser = ?", whereArgs: [user.idUser]);
+    return response;
+  }
 
 
-
-
+  //Update
+  updateReminder(Reminder reminder) async {
+    final db = await database;
+    var response = await db.update("Reminder", reminder.toMap(),
+    where: "idReminder = ?", whereArgs: [reminder.idReminder]);
+    return response;
+  }
 }
