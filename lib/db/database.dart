@@ -32,13 +32,13 @@ class PastilleroDataBaseProvider{
     String queryU = "CREATE TABLE User ("
       "idUser integer primary key,"
       "name TEXT,"
-      "lname TEXT,"
+      "last_name TEXT,"
       "email TEXT,"
       "password TEXT,"
       "mobile TEXT,"
-      "sex TEXT,"
-      "age TEXT,"
-      "comments TEXT"
+      "gender TEXT,"
+      "age INTEGER,"
+      "parent_id INT"
       ")";
     _database = await getDatabaseInstanace(pathR, queryR, queryU);
     return _database;
@@ -72,7 +72,7 @@ class PastilleroDataBaseProvider{
     return list;
   }
 
-   //Query
+  //Query
   //muestra un solo usuario por el id la base de datos
   Future<User> getUserWithId(int id) async {
     final db = await database;
@@ -80,7 +80,13 @@ class PastilleroDataBaseProvider{
     return response.isNotEmpty ? User.fromMap(response.first) : null;
   }
 
-   //Query
+  Future<User> getUserWithEmail(String email) async {
+    final db = await database;
+    var response = await db.query("User", where: "email = ?", whereArgs: [id]);
+    return response.isNotEmpty ? User.fromMap(response.first) : null;
+  }
+
+  //Query
   //muestra un solo usuario por el id la base de datos
   Future<Reminder> getReminderWithId(int id) async {
     final db = await database;
@@ -89,7 +95,7 @@ class PastilleroDataBaseProvider{
   }
 
 
- //Insert user
+ //Inserta usuairo
   addUserToDatabase(User user) async {
     final db = await database;
     var table = await db.rawQuery("SELECT MAX(idUser)+1 as id FROM User");
@@ -104,7 +110,7 @@ class PastilleroDataBaseProvider{
 
   }
 
-  //Insert Reminder
+  //Inserta Reminder
   addReminderToDatabase(Reminder reminder) async {
     final db = await database;
     var table = await db.rawQuery("SELECT MAX(idReminder)+1 as id FROM Reminder");
@@ -119,32 +125,32 @@ class PastilleroDataBaseProvider{
 
   }
 
-    //Elimina todos los usuarios
-    deleteAllUser() async {
+  //Elimina todos los usuarios
+  deleteAllUser() async {
     final db = await database;
     db.delete("User");
   } 
 
   // Elimina usuario por id
-   deleteUserWithId(int id) async {
+  deleteUserWithId(int id) async {
     final db = await database;
     return db.delete("User", where: "idUser = ?", whereArgs: [id]);
   } 
 
-   //Elimina todos los reminder
-    deleteAllReminder() async {
+  //Elimina todos los reminder
+  deleteAllReminder() async {
     final db = await database;
     db.delete("Reminder");
   } 
 
   // Elimina reminder por id
-   deleteReminderWithId(int id) async {
+  deleteReminderWithId(int id) async {
     final db = await database;
     return db.delete("Reminder", where: "idReminder = ?", whereArgs: [id]);
   } 
 
   
-  //Update
+  //Actualiza usuario
   updateUser(User user) async {
     final db = await database;
     var response = await db.update("User", user.toMap(),
@@ -153,7 +159,7 @@ class PastilleroDataBaseProvider{
   }
 
 
-  //Update
+  //Actualizar recordatorios
   updateReminder(Reminder reminder) async {
     final db = await database;
     var response = await db.update("Reminder", reminder.toMap(),

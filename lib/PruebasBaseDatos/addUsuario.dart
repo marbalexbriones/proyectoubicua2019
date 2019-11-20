@@ -35,7 +35,6 @@ class _AddEditUserState extends State<AddEditUser> {
       mobileEditingController.text = widget.user.mobile; 
       sexEditingController.text = widget.user.sex; 
       ageEditingController.text = widget.user.age;
-      commentsEditingController.text = widget.user.comments; 
     }
 
   }
@@ -78,8 +77,8 @@ class _AddEditUserState extends State<AddEditUser> {
                 textFormFieldNumber(ageEditingController, "Age","En",
                 Icons.person, widget.edit ? widget.user.age: "Age"),
 
-                textFormField(commentsEditingController, "coments","En",
-                Icons.person, widget.edit ? widget.user.comments: "coments"),
+                //textFormField(commentsEditingController, "coments","En",
+               // Icons.person, widget.edit ? widget.user.comments: "coments"),
                 RaisedButton(
                   color: Colors.amberAccent,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -96,7 +95,7 @@ class _AddEditUserState extends State<AddEditUser> {
                         SnackBar(content: Text("Procesin data"))
                       );
                     }else if(widget.edit == true){
-                     /* PastilleroDataBaseProvider.db.uopdateUser(new User(
+                      /* PastilleroDataBaseProvider.db.uopdateUser(new User(
                         name: nameEditingController;
                         update
 
@@ -112,7 +111,6 @@ class _AddEditUserState extends State<AddEditUser> {
                         mobile: mobileEditingController.text,
                         sex: sexEditingController.text,
                         age: ageEditingController.text,
-                        comments: commentsEditingController.text
                       ));
                       Navigator.pop(context);
                     }
