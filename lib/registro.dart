@@ -99,7 +99,6 @@ class RegistroState extends State<Registro> {
                       ),
                     ),
                   ),
-                  
                   Container(
                     padding: EdgeInsets.only(bottom: 5.0),
                     child: TextFormField(
@@ -126,10 +125,10 @@ class RegistroState extends State<Registro> {
                   ),
                   MaterialButton(
                     elevation: 5,
-                    onPressed: ()async{
+                    onPressed: () async {
                       if(!_formKay.currentState.validate()){
                         Scaffold.of(context).showSnackBar(
-                          SnackBar(content: Text("Procesin data"))
+                          SnackBar(content: Text("Procesing data"))
                         );
                       }else {
                         // Si no existe
@@ -144,7 +143,10 @@ class RegistroState extends State<Registro> {
                         );
                         //si ya existe
                         // If () ... { }
-                        await PastilleroDataBaseProvider.db.addUserToDatabase(s);
+                        var user = await PastilleroDataBaseProvider.db.getUserWithEmail(s.email);
+                        if (user != null) {
+                           await PastilleroDataBaseProvider.db.addUserToDatabase(s);
+                        }
                         Navigator.pop(context);
                       }
                     },
@@ -161,3 +163,4 @@ class RegistroState extends State<Registro> {
         ));
   }
 }
+

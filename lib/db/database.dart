@@ -82,9 +82,10 @@ class PastilleroDataBaseProvider{
 
   Future<User> getUserWithEmail(String email) async {
     final db = await database;
-    var response = await db.query("User", where: "email = ?", whereArgs: [id]);
+    var response = await db.query("User", where: "email = ?", whereArgs: [email]);
     return response.isNotEmpty ? User.fromMap(response.first) : null;
   }
+
 
   //Query
   //muestra un solo usuario por el id la base de datos
@@ -107,7 +108,6 @@ class PastilleroDataBaseProvider{
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
     return raw;    
-
   }
 
   //Inserta Reminder
@@ -122,7 +122,6 @@ class PastilleroDataBaseProvider{
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
     return raw;    
-
   }
 
   //Elimina todos los usuarios

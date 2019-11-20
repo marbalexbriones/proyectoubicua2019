@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:proyectoubicua2019/PruebasBaseDatos/pruebaDB.dart';
 import 'package:proyectoubicua2019/Recuperar.dart';
 import 'package:proyectoubicua2019/colors.dart';
+import 'package:proyectoubicua2019/db/database.dart';
 import 'package:proyectoubicua2019/registro.dart';
 import 'package:proyectoubicua2019/inicio.dart';
 
@@ -16,14 +17,16 @@ class Login extends StatefulWidget {
 }
 
 class LoginState extends State<Login> {
-  var username = "";
-  var password = "";
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
+        child: Form(
+          key: _formKey,
           child: ListView(
             shrinkWrap: true,
             children: <Widget>[
@@ -44,15 +47,15 @@ class LoginState extends State<Login> {
               Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 8.0),
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  controller: emailController,
                   decoration: InputDecoration(
-                    labelText: 'Nombre de Usuario:',
+                    labelText: 'Nombre de Usuario (correo):',
                     labelStyle: TextStyle(fontFamily: "GoogleSans"),
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'El campo no debe estar vacío';
-                    } else {
-                      username = value;
                     }
                     return null;
                   },
@@ -62,6 +65,7 @@ class LoginState extends State<Login> {
                 padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 50.0),
                 child: TextFormField(
                   obscureText: true,
+                  controller: passwordController,
                   decoration: InputDecoration(
                     labelText: 'Contraseña:',
                     labelStyle: TextStyle(fontFamily: "GoogleSans"),
@@ -69,9 +73,7 @@ class LoginState extends State<Login> {
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'El campo no debe estar vacío';
-                    } else {
-                      password = value;
-                    }
+                    } 
                     return null;
                   },
                 ),
@@ -83,10 +85,13 @@ class LoginState extends State<Login> {
                   height: 40.0,
                   elevation: 5,
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Inicio()),
-                    );
+                    if (_formKey.currentState.validate()) {
+                      PastilleroDataBaseProvider.db.getUserWithEmail(emailController.text);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Inicio()),
+                      );
+                    }
                   },
                   color: col_primary,
                   child: Text(
