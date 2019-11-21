@@ -141,13 +141,13 @@ class RegistroState extends State<Registro> {
                           sex: "male",
                           age: ageEditingController.text,
                         );
-                        //si ya existe
+                        //si no existe, entonces
                         // If () ... { }
                         var user = await PastilleroDataBaseProvider.db.getUserWithEmail(s.email);
-                        if (user != null) {
+                        if (user == null) {
                            await PastilleroDataBaseProvider.db.addUserToDatabase(s);
+                          Navigator.pop(context);
                         }
-                        Navigator.pop(context);
                       }
                     },
                     color: col_primary,

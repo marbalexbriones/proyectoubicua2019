@@ -78,20 +78,32 @@ class LoginState extends State<Login> {
                   },
                 ),
               ),
+ 
               Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
                 child: MaterialButton(
                   minWidth: 100.0,
                   height: 40.0,
                   elevation: 5,
-                  onPressed: () {
+                  onPressed: () async {
+                    final snackBar = SnackBar(
+                      // Se cre auna variable snackbar
+                      content: Text("Usuario no existe"),
+                      action: SnackBarAction(
+                        label: "Aceptar",
+                        onPressed: () {},
+                      ),
+                    );
                     if (_formKey.currentState.validate()) {
-                      PastilleroDataBaseProvider.db.getUserWithEmail(emailController.text);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Inicio()),
-                      );
+                      var user = await PastilleroDataBaseProvider.db.getUserWithEmail(emailController.text);
+                      if (user != null) {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()),);
+                      }
+                      else {
+                        Scaffold.of(context).showSnackBar(snackBar);
+                      }
                     }
+                    return null;
                   },
                   color: col_primary,
                   child: Text(
