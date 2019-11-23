@@ -83,7 +83,6 @@ class LoginState extends State<Login> {
                   height: 40.0,
                   elevation: 5,
                   onPressed: () {
-                    Navigator.pop(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Inicio()),

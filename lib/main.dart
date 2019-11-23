@@ -14,8 +14,9 @@ import 'package:sqflite/sqflite.dart';
 
 void main() {
   runApp(new MaterialApp(
-    home: new MyApp(),
     theme: ThemeData(primarySwatch: Colors.cyan,),
+    home: new MyApp(),
+    
 
   ));
 }
@@ -129,31 +130,7 @@ class Main extends StatelessWidget {
 }
 
 
-class PastillAppNavBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new BottomNavigationBar(
-      backgroundColor: col_light_gray,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Perfil'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.alarm),
-            title: Text('Alarmas'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.contact_phone),
-            title: Text('Directorio'),
-          ),
-        ],
-        //currentIndex: _selectedIndex,
-        selectedItemColor: Colors.cyan,
-        //onTap: _onItemTapped,
-      );
-  }
-}
+
 
 /*import 'package:flutter/material.dart';
 
