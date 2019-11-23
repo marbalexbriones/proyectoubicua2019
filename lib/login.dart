@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proyectoubicua2019/PruebasBaseDatos/pruebaDB.dart';
-import 'package:proyectoubicua2019/Recuperar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:proyectoubicua2019/colors.dart';
 import 'package:proyectoubicua2019/db/database.dart';
 import 'package:proyectoubicua2019/registro.dart';
@@ -19,13 +19,17 @@ class Login extends StatefulWidget {
 class LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+  bool _autovalidate = false;
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Form(
+          autovalidate: _autovalidate,
           key: _formKey,
           child: ListView(
             shrinkWrap: true,
@@ -37,7 +41,7 @@ class LoginState extends State<Login> {
               ),
               SizedBox(height: 5.0),
               Center(
-                  child: Text(
+                child: Text(
                 "Iniciar Sesión",
                 style: TextStyle(
                     color: col_blue_gray,
@@ -53,12 +57,7 @@ class LoginState extends State<Login> {
                     labelText: 'Nombre de Usuario (correo):',
                     labelStyle: TextStyle(fontFamily: "GoogleSans"),
                   ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'El campo no debe estar vacío';
-                    }
-                    return null;
-                  },
+                  validator: validateEmail,
                 ),
               ),
               Padding(
@@ -70,12 +69,7 @@ class LoginState extends State<Login> {
                     labelText: 'Contraseña:',
                     labelStyle: TextStyle(fontFamily: "GoogleSans"),
                   ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'El campo no debe estar vacío';
-                    } 
-                    return null;
-                  },
+                  validator: validatePassword,
                 ),
               ),
  
@@ -100,7 +94,8 @@ class LoginState extends State<Login> {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()),);
                       }
                       else {
-                        Scaffold.of(context).showSnackBar(snackBar);
+                        Fluttertoast.showToast(msg: 'Incorrecto !',toastLength: Toast.LENGTH_SHORT);
+                        //Scaffold.of(context).showSnackBar(snackBar);
                       }
                     }
                     return null;
@@ -128,26 +123,6 @@ class LoginState extends State<Login> {
                   child: Text(
                     'Prueba',
                     style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
-                child: OutlineButton(
-                  borderSide: BorderSide(
-                    color: Colors.white,
-                    width: 0.0,
-                  ),
-                  shape: StadiumBorder(),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Recuperar()),
-                    );
-                  },
-                  child: Text(
-                    'Olvidé mi contraseña',
-                    style: TextStyle(fontSize: 15, color: col_primary),
                   ),
                 ),
               ),
@@ -182,5 +157,26 @@ class LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  String validatePassword(String value) {
+    if (value.length < 8) {
+      return 'Verifica tus datos';
+    }
+    else {
+      return null;
+    }
+  }
+
+  String validateEmail(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      return 'Verifica tus datos';
+    }
+    else {
+      return null;
+    }
   }
 }
