@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:proyectoubicua2019/AcercaDe.dart';
-import 'package:proyectoubicua2019/Configuracion.dart';
+import 'package:proyectoubicua2019/configuracion.dart';
 import 'package:proyectoubicua2019/aniadir.dart';
 import 'package:proyectoubicua2019/Ayuda.dart';
+import 'package:proyectoubicua2019/login.dart';
 import 'package:proyectoubicua2019/pastillaapp.dart';
 import 'package:proyectoubicua2019/usuarios.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proyectoubicua2019/anadiresclavo.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomDrawer extends Drawer {
   @override
@@ -101,8 +103,8 @@ Widget _createDrawerItem(
                 context, MaterialPageRoute(builder: (context) => Usuarios()));
             break;
           case "Configuracion":
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Configuracion()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Configuracion()));
             break;
           case "Acercade":
             Navigator.push(
@@ -113,9 +115,15 @@ Widget _createDrawerItem(
                 context, MaterialPageRoute(builder: (context) => Ayuda()));
             break;
           case "CerrarSesion":
-            /*Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Aniadir()));*/
+            removeData();
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Login()));
             break;
         }
       });
+}
+
+removeData() async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.remove('idParent');
 }
