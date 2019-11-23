@@ -37,8 +37,8 @@ class PastilleroDataBaseProvider{
       "password TEXT,"
       "mobile TEXT,"
       "gender TEXT,"
-      "age INTEGER,"
-      "parent_id INT"
+      "age TEXT,"
+      "parent_id INTEGER"
       ")";
     _database = await getDatabaseInstanace(pathR, queryR, queryU);
     return _database;
