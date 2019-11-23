@@ -3,11 +3,11 @@ import 'pastillas.dart';
 import 'directorio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'main.dart';
 import 'package:proyectoubicua2019/colors.dart';
 import 'perfil.dart';
 
 class Inicio extends StatelessWidget {
+
   final example = [
     {
       "imagen": "assets/images/pastilla.jpg",
