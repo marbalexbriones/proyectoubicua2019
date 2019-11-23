@@ -4,12 +4,11 @@ class User{
   String lname;
   String email;
   String password;
-  String celular;
-  String sexo;
-  String edad;
-  String comentarios;
+  String mobile;
+  String sex;
+  String age;
 
-  User ({this.idUser, this.name, this.lname, this.email, this.password, this.celular, this.sexo,this.edad,this.comentarios});
+  User ({this.idUser, this.name, this.lname, this.email, this.password, this.mobile, this.sex,this.age});
 
   //To insert the data in the bd, we need to convert it into a Map
   //Para insertar los datos en la bd, necesitamos convertirlo en un Map
@@ -19,10 +18,9 @@ class User{
         "lname":lname,
         "email":email,
         "password":password,
-        "mobile":celular,
-        "sex":sexo,
-        "age":edad,
-        "comments":comentarios,
+        "mobile":mobile,
+        "sex":sex,
+        "age":age,
   };
 
   //to receive the data we need to pass it from Map to jsons
@@ -33,10 +31,9 @@ class User{
         lname: json ["lname"],
         email: json ["email"],
         password: json ["password"],
-        celular: json ["mobile"],
-        sexo: json ["sex"],
-        edad: json ["age"],
-        comentarios: json ["comments"],
+        mobile: json ["mobile"],
+        sex: json ["sex"],
+        age: json ["age"],
     );
 }
 

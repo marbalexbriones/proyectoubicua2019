@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:proyectoubicua2019/PruebasBaseDatos/pruebaDB.dart';
 import 'package:proyectoubicua2019/Recuperar.dart';
 import 'package:proyectoubicua2019/colors.dart';
+import 'package:proyectoubicua2019/db/database.dart';
 import 'package:proyectoubicua2019/registro.dart';
 import 'package:proyectoubicua2019/inicio.dart';
 
@@ -15,14 +17,16 @@ class Login extends StatefulWidget {
 }
 
 class LoginState extends State<Login> {
-  var username = "";
-  var password = "";
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
+        child: Form(
+          key: _formKey,
           child: ListView(
             shrinkWrap: true,
             children: <Widget>[
@@ -43,24 +47,25 @@ class LoginState extends State<Login> {
               Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 8.0),
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  controller: emailController,
                   decoration: InputDecoration(
-                    labelText: 'Nombre de Usuario:',
+                    labelText: 'Nombre de Usuario (correo):',
                     labelStyle: TextStyle(fontFamily: "GoogleSans"),
                   ),
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'El campo no debe estar vacío';
-                    } else {
-                      username = value;
                     }
                     return null;
                   },
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
+                padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 50.0),
                 child: TextFormField(
                   obscureText: true,
+                  controller: passwordController,
                   decoration: InputDecoration(
                     labelText: 'Contraseña:',
                     labelStyle: TextStyle(fontFamily: "GoogleSans"),
@@ -68,16 +73,47 @@ class LoginState extends State<Login> {
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'El campo no debe estar vacío';
-                    } else {
-                      password = value;
-                    }
+                    } 
                     return null;
                   },
                 ),
               ),
-              new SizedBox(height: 5.0),
+ 
               Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
+                child: MaterialButton(
+                  minWidth: 100.0,
+                  height: 40.0,
+                  elevation: 5,
+                  onPressed: () async {
+                    final snackBar = SnackBar(
+                      // Se cre auna variable snackbar
+                      content: Text("Usuario no existe"),
+                      action: SnackBarAction(
+                        label: "Aceptar",
+                        onPressed: () {},
+                      ),
+                    );
+                    if (_formKey.currentState.validate()) {
+                      var user = await PastilleroDataBaseProvider.db.getUserWithEmail(emailController.text);
+                      if (user != null) {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()),);
+                      }
+                      else {
+                        Scaffold.of(context).showSnackBar(snackBar);
+                      }
+                    }
+                    return null;
+                  },
+                  color: col_primary,
+                  child: Text(
+                    'Acceder',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 50.0),
                 child: MaterialButton(
                   minWidth: 100.0,
                   height: 40.0,
@@ -85,12 +121,12 @@ class LoginState extends State<Login> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Inicio()),
+                      MaterialPageRoute(builder: (context) => Prueba()),
                     );
                   },
                   color: col_primary,
                   child: Text(
-                    'Acceder',
+                    'Prueba',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -115,10 +151,10 @@ class LoginState extends State<Login> {
                   ),
                 ),
               ),
-              new SizedBox(height: 90.0),
               Padding(
-                padding: EdgeInsets.fromLTRB(75.0, 0.0, 75.0, 0.0),
+                padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Text("¿Aún no tienes cuenta?"),
                     OutlineButton(
