@@ -8,56 +8,11 @@ class Perfil extends StatefulWidget {
   }
 }
 
-// class CustomAppBar extends StatelessWidget with PreferredSizeWidget{
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       color: Colors.cyan,
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         mainAxisAlignment: MainAxisAlignment.end,
-//         children: <Widget>[
-//           CircleAvatar(
-//             backgroundImage: NetworkImage("https://picsum.photos/300"),
-//             minRadius: 30, maxRadius: 60,
-//           ),
-//           Text("hola"),
-//           Text("hola"),
-
-//         ],
-//       )
-//     );
-//   }
-
-//   @override
-//   Size get preferredSize => Size(double.infinity, 200);
-
-// }
-
-// class MyAppBar extends PreferredSize {
-//   MyAppBar({Key key, Widget title}) : super(
-//     key: key,
-//     preferredSize: Size(double.infinity, 200),
-//     child: AppBar(
-//       title: title,
-//       leading: Column(
-//         children: <Widget>[
-//           CircleAvatar(
-//             backgroundImage: NetworkImage("https://picsum.photos/300"),
-//             minRadius: 30, maxRadius: 60,
-//           ),
-//         ],
-
-//       ),
-//       // maybe other AppBar properties
-//     ),
-//   );
-// }
 
 class PerfilState extends State<Perfil> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
 
   void _onItemTapped(int index) {
     setState(() {
@@ -67,16 +22,80 @@ class PerfilState extends State<Perfil> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: Wrap(
+    return Scaffold(
+
+    body: Form(
+    child: SingleChildScrollView(
+
+    child: Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+    Row(children: <Widget>[
+    Expanded(
+    child:Container(
+    height: 150,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+
+          colorFilter: new ColorFilter.mode(Colors.blue.withOpacity(1.0), BlendMode.darken),
+          image: AssetImage('assets/images/messi.jpg', ),
+          fit:BoxFit.cover,
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(top: 80),
+        child: Row(children: <Widget>[
+          Padding(padding: EdgeInsets.only(left: 20,bottom:25),),
+          Container(
+            padding: EdgeInsets.only(right: 100),
+            width: 70,
+            height: 100,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/messi2.jpg'),
+                  fit: BoxFit.cover,
+                ),
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.white,
+                  width: 5,
+                )
+            ),
+          ),
+          Padding(padding: EdgeInsets.only(left: 20,bottom:25),),
+          Text("Nombre Usuario",style: TextStyle(color: Colors.white,fontSize: 30, fontWeight: FontWeight.bold),),
+        ],),
+      ) ,
+    ),
+
+    )
+      ],),
+      Row(
+        children: <Widget>[
+          Padding(padding: EdgeInsets.only(left: 200),),
+          Container(
+            width: 100,
+
+
+          ),
+          FloatingActionButton(onPressed:(){
+
+          },
+            child: Icon(Icons.save),
+            backgroundColor: Colors.yellow,
+          ),
+        ],
+      ),
+      Wrap(
         children: <Widget>[
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
+
               Container(
-                padding: EdgeInsets.only(bottom: 10.0),
+                padding: EdgeInsets.only(left: 12),
                 child: TextFormField(
                   decoration: InputDecoration(
                     labelText: "Nombre",
@@ -85,7 +104,7 @@ class PerfilState extends State<Perfil> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(bottom: 10.0),
+                padding: EdgeInsets.only(left: 12),
                 child: TextFormField(
                   decoration: InputDecoration(
                     labelText: "Apellido",
@@ -94,7 +113,7 @@ class PerfilState extends State<Perfil> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(bottom: 10.0),
+                padding: EdgeInsets.only(left: 12),
                 child: TextFormField(
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
@@ -104,7 +123,7 @@ class PerfilState extends State<Perfil> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(bottom: 10.0),
+                padding: EdgeInsets.only(left: 12),
                 child: TextFormField(
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
@@ -114,7 +133,7 @@ class PerfilState extends State<Perfil> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(bottom: 10.0),
+                padding: EdgeInsets.only(left: 12),
                 child: TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -123,45 +142,49 @@ class PerfilState extends State<Perfil> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(bottom: 10.0),
+                padding: EdgeInsets.only(left: 12),
                 child: TextFormField(
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: "Sexo",
                   ),
-                  obscureText: true,
+
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(bottom: 10.0),
+                padding: EdgeInsets.only(left: 12),
                 child: TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     labelText: "Edad",
                   ),
-                  obscureText: true,
+
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(bottom: 10.0),
+                padding: EdgeInsets.only(left: 12),
                 child: TextFormField(
                   keyboardType: TextInputType.text,
-                  decoration: InputDecoration(labelText: "Comentarios"),
-                  obscureText: true,
+                  decoration: InputDecoration(
+                      labelText: "Comentarios",
+                      hintText: "Asma hereditaria,Alergia: al gluten"
+                  ),
                 ),
               ),
-              Text("Ayuda"),
-              Center(
-                child: RaisedButton(
-                  color: Colors.cyanAccent,
-                  child: Text("Registrarse"),
-                  onPressed: () {},
-                ),
-              )
+
+              
             ],
           ),
         ],
       ),
+
+
+    ]
+    ),
+
+    ),
+    ),
+
     );
   }
 }

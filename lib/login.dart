@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:proyectoubicua2019/registroEsclavo.dart';
+import 'package:proyectoubicua2019/perfil.dart';
+import 'package:proyectoubicua2019/anadiresclavo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:proyectoubicua2019/colors.dart';
