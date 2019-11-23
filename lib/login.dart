@@ -100,7 +100,7 @@ class LoginState extends State<Login> {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()),);
                       }
                       else {
-                        Scaffold.of(context).showSnackBar(snackBar);
+                        //Scaffold.of(context).showSnackBar(snackBar);
                       }
                     }
                     return null;
@@ -121,7 +121,7 @@ class LoginState extends State<Login> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Prueba()),
+                      MaterialPageRoute(builder: (context) => Inicio()),
                     );
                   },
                   color: col_primary,

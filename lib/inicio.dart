@@ -117,8 +117,24 @@ class Inicio extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              Perfil(),
-              Pastillas(dataSource: example),
+              new Scaffold(
+                body: Perfil(),
+              ),
+              //Perfil(),
+              new Scaffold(
+                body: Pastillas(dataSource: example),
+                floatingActionButton: FloatingActionButton(
+                  child: Icon(Icons.add),
+                  onPressed: () {
+                    // Add your onPressed code here!
+                  },
+                  splashColor: col_primary,
+                  backgroundColor: col_primary,
+                  elevation: 3,
+
+                ),
+              ),
+
               Directorio(dataSource: doctors),
             ],
           ),
