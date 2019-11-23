@@ -11,44 +11,46 @@ class Pastillas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      crossAxisCount: 2,
-      children: List.generate(dataSource.length + 1, (index) {
-        if (index < dataSource.length) {
-          return customCard(
-              dataSource[index]['imagen'],
-              dataSource[index]['nombre'],
-              dataSource[index]['dosis'],
-              dataSource[index]['tiempo'],
-              dataSource[index]['restantes'],
-              context);
-        } else {
-          return addCard();
-        }
+      childAspectRatio: (1 / 0.77),
+      crossAxisCount: 1,
+      children: List.generate(dataSource.length, (index) {
+        return customCard(
+            dataSource[index]['imagen'],
+            dataSource[index]['nombre'],
+            dataSource[index]['dosis'],
+            dataSource[index]['tiempo'],
+            dataSource[index]['restantes'],
+            context);
       }),
     );
   }
 }
 
-
 //CELDAS DE INICIO
 
 Widget customCard(String imagen, String nombre, String dosis, String time,
         String restantes, BuildContext context) =>
-    Card(
+    Padding(
+      padding: EdgeInsets.all(5.0),
       child: Center(
-        child: Column(
-          children: <Widget>[
-            Image.asset(imagen),
-            Text(nombre),
-            Text(dosis + " | " + time + " | " + restantes),
-            ButtonBar(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-                  child: MaterialButton(
-                    minWidth: 100.0,
-                    height: 40.0,
+        child: Card(
+          child: Column(
+            children: <Widget>[
+              Image.asset(imagen, width: 250),
+              Center(
+                child: Column(
+                  children: <Widget>[
+                    Text(nombre),
+                    Text(dosis + " | " + time + " | " + restantes),
+                  ],
+                ),
+              ),
+              ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  MaterialButton(
+                    minWidth: 30.0,
+                    height: 30.0,
                     elevation: 5,
                     onPressed: () {
                       Navigator.pop(context);
@@ -63,38 +65,27 @@ Widget customCard(String imagen, String nombre, String dosis, String time,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
-                  child: OutlineButton(
-                    borderSide: BorderSide(
-                      color: Colors.white,
-                      width: 0.0,
-                    ),
-                    shape: StadiumBorder(),
+                  MaterialButton(
+                    minWidth: 30.0,
+                    height: 30.0,
+                    elevation: 3,
                     onPressed: () {
+                      Navigator.pop(context);
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Inicio()),
                       );
                     },
+                    color: Colors.white,
                     child: Text(
-                      'Editar',
-                      style: TextStyle(fontSize: 15, color: col_primary),
+                      'Rellenar',
+                      style: TextStyle(color: col_primary),
                     ),
                   ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-
-Widget addCard() => Card(
-      child: Center(
-        child: Column(
-          children: <Widget>[Text("Agregar")],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

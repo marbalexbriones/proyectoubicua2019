@@ -1,104 +1,90 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'colors.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-void main() => runApp(new MyApp());
+final users = [
+  {
+    "imagen": "assets/images/pastilla.jpg",
+    "nombre": "Juan Carlos",
+  },
+];
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class Usuarios extends StatelessWidget {
+  var dataSource = users;
+  //Usuarios({Key key, @required this.dataSource}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Flutter Demo',
-      theme: new ThemeData(
-        primarySwatch: Colors.blue,
+    return Scaffold(
+      appBar: new AppBar(
+        title: new Text("Usuarios"),
+        backgroundColor: Colors.cyan,
       ),
-      home: new MyHomePage(title: 'Flutter Demo Home Page'),
+      body: GridView.count(
+        childAspectRatio: (1 / 0.17),
+        crossAxisCount: 1,
+        children: List.generate(dataSource.length, (index) {
+          return userCard(dataSource[index]['imagen'],
+              dataSource[index]['nombre'], context);
+        }),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        splashColor: col_primary,
+        backgroundColor: col_primary,
+        elevation: 3,
+      ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+//CELDAS DE INICIO
 
-  @override
-  _MyHomePageState createState() => new _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  int present = 0;
-  int perPage = 8;
-
-  final originalItems = List<String>.generate(1, (i) => "Item $i");
-  var items = List<Card>();
-
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      items.add(new Card(
-        child:Column(
-          children: <Widget>[
-
-            ListTile(
-              leading: Image(image: AssetImage('assets/images/pastilla.jpg'),
-                width: 90,
-                height: 90,
-              ),
-              title: Text('Usuario'),
-              subtitle: Text('Toma Pastilla'),
-              trailing: RaisedButton(child:
-              Text('Seleccionar',style: TextStyle(color: col_primary),)
-                ,onPressed: (){},color: col_primary,),
-            )
-          ],
-        ),
-      ));
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(widget.title),
-      ),
-      body: ListView.builder(
-        itemCount: (present <= originalItems.length) ? items.length + 1 : items.length,
-        itemBuilder: (context, index) {
-          return (index == items.length ) ?
-          Card(
+Widget userCard(String imagen, String nombre, BuildContext context) => Padding(
+      padding: EdgeInsets.all(5.0),
+      child: Card(
+          child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 2, // 20%
+            child: Image.asset(
+              imagen,
+              height: 130,
+            ),
+          ),
+          Expanded(
+            flex: 5, // 60%
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                FloatingActionButton(
-                  onPressed: () {
-                    setState(() {
-                      items.add(Card());
-                    });
-
-                  },
-                  child: Icon(Icons.add),
-                  backgroundColor: col_primary,
-                ),
+                Text(nombre),
               ],
             ),
-          )
-              :
-          ListTile(
-            leading: Image(image: AssetImage('Assets/Images/pastilla.jpg'),
-              width: 90,
-              height: 90,
+          ),
+          Expanded(
+            flex: 3, // 20%
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
+              child: MaterialButton(
+                minWidth: 30.0,
+                height: 30.0,
+                elevation: 3,
+                onPressed: () {
+                  //AQUI VAMOS A CAMBIAR DE USUARIO
+                },
+                color: col_primary,
+                child: Text(
+                  'Seleccionar',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
-            title: Text('Usuario'),
-            subtitle: Text('Toma Pastilla'),
-            trailing: RaisedButton(child:
-            Text('Seleccionar',style: TextStyle(color: Colors.white),)
-              ,onPressed: (){},color: Colors.blue,),
-          );
-        },
-      ),
+          )
+        ],
+      )),
     );
-  }
-}
