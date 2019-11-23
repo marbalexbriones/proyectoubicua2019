@@ -46,12 +46,13 @@ class Reminder{
   String medicine;
   String quantity;
   String unit;
+  String regTime;
   String frequency;
   String quantityAva;
   String indication;
   
 
-  Reminder ({this.idReminder, this.idUser, this.medicine, this.quantity, this.unit, this.frequency, this.quantityAva,this.indication});
+  Reminder ({this.idReminder, this.idUser, this.medicine, this.quantity, this.unit,this.regTime, this.frequency, this.quantityAva,this.indication});
 
   //To insert the data in the bd, we need to convert it into a Map
   //Para insertar los datos en la bd, necesitamos convertirlo en un Map
@@ -61,6 +62,7 @@ class Reminder{
         "medicine":medicine,
         "quantity":quantity,
         "unit":unit,
+        "RegTime":regTime ,
         "frequency":frequency,
         "quantityAva":quantityAva,
         "indication":indication,

@@ -25,6 +25,7 @@ class PastilleroDataBaseProvider{
       "medicine TEXT,"
       "quantity TEXT,"
       "unit TEXT,"
+      "RegTime TIME,"
       "frequency TEXT,"
       "quantityAva TEXT,"
       "indication TEXT"
