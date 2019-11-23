@@ -80,14 +80,7 @@ class LoginState extends State<Login> {
                   height: 40.0,
                   elevation: 5,
                   onPressed: () async {
-                    final snackBar = SnackBar(
-                      // Se cre auna variable snackbar
-                      content: Text("Usuario no existe"),
-                      action: SnackBarAction(
-                        label: "Aceptar",
-                        onPressed: () {},
-                      ),
-                    );
+                    
                     if (_formKey.currentState.validate()) {
                       var user = await PastilleroDataBaseProvider.db.getUserWithEmail(emailController.text);
                       if (user != null) {
@@ -95,7 +88,6 @@ class LoginState extends State<Login> {
                       }
                       else {
                         Fluttertoast.showToast(msg: 'Incorrecto !',toastLength: Toast.LENGTH_SHORT);
-                        //Scaffold.of(context).showSnackBar(snackBar);
                       }
                     }
                     return null;
@@ -107,25 +99,7 @@ class LoginState extends State<Login> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 50.0),
-                child: MaterialButton(
-                  minWidth: 100.0,
-                  height: 40.0,
-                  elevation: 5,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Prueba()),
-                    );
-                  },
-                  color: col_primary,
-                  child: Text(
-                    'Prueba',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
+              
               Padding(
                 padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                 child: Row(

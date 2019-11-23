@@ -23,7 +23,7 @@ class RegistroState extends State<Registro> {
 
   final _formKay = GlobalKey<FormState>();
   int _radioValue1 = -1;
-
+  String _gender = "none";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -189,8 +189,10 @@ class RegistroState extends State<Registro> {
         case 0:
           break;
         case 1:
+          _gender = "masculino";
           break;
         case 2:
+          _gender = "femenino";
           break;
       }
     });
@@ -210,7 +212,7 @@ class RegistroState extends State<Registro> {
         email: emailEditingController.text,
         password: passEditingController.text,
         mobile: mobileEditingController.text,
-        gender: "male",
+        gender: _gender,
         age: ageEditingController.text,
         parent_id: 1,
       );
