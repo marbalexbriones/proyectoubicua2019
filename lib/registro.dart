@@ -210,8 +210,9 @@ class RegistroState extends State<Registro> {
         email: emailEditingController.text,
         password: passEditingController.text,
         mobile: mobileEditingController.text,
-        sex: "male",
+        gender: "male",
         age: ageEditingController.text,
+        parent_id: 1,
       );
       //si no existe, entonces
       // If () ... { }

@@ -5,22 +5,24 @@ class User{
   String email;
   String password;
   String mobile;
-  String sex;
+  String gender;
   String age;
+  int parent_id;
 
-  User ({this.idUser, this.name, this.lname, this.email, this.password, this.mobile, this.sex,this.age});
+  User ({this.idUser, this.name, this.lname, this.email, this.password, this.mobile, this.gender,this.age, this.parent_id});
 
   //To insert the data in the bd, we need to convert it into a Map
   //Para insertar los datos en la bd, necesitamos convertirlo en un Map
   Map<String, dynamic> toMap() => {
         "idUser": idUser,
         "name ":name,
-        "lname":lname,
+        "last_name":lname,
         "email":email,
         "password":password,
         "mobile":mobile,
-        "sex":sex,
+        "gender":gender,
         "age":age,
+        "parent_id": parent_id,
   };
 
   //to receive the data we need to pass it from Map to jsons
@@ -28,12 +30,13 @@ class User{
   factory User.fromMap(Map<String, dynamic> json) => new User(
         idUser: json["idUser"],
         name: json ["name"],
-        lname: json ["lname"],
+        lname: json ["last_name"],
         email: json ["email"],
         password: json ["password"],
         mobile: json ["mobile"],
-        sex: json ["sex"],
+        gender: json ["gender"],
         age: json ["age"],
+        parent_id: json["parent_id"],
     );
 }
 

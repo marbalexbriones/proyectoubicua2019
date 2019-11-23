@@ -19,7 +19,7 @@ class _AddEditUserState extends State<AddEditUser> {
   TextEditingController emailEditingController = TextEditingController(); 
   TextEditingController passEditingController = TextEditingController(); 
   TextEditingController mobileEditingController = TextEditingController(); 
-  TextEditingController sexEditingController = TextEditingController(); 
+  TextEditingController genderEditingController = TextEditingController(); 
   TextEditingController ageEditingController = TextEditingController(); 
   TextEditingController commentsEditingController = TextEditingController(); 
   final _formKay = GlobalKey<FormState>();
@@ -33,8 +33,8 @@ class _AddEditUserState extends State<AddEditUser> {
       emailEditingController.text = widget.user.email ; 
       passEditingController.text = widget.user.password ; 
       mobileEditingController.text = widget.user.mobile; 
-      sexEditingController.text = widget.user.sex; 
-      ageEditingController.text = widget.user.age;
+      genderEditingController.text = widget.user.gender; 
+     // ageEditingController.text = widget.user.age;
     }
 
   }
@@ -71,8 +71,8 @@ class _AddEditUserState extends State<AddEditUser> {
                 textFormFieldNumber(mobileEditingController, "mobile","En",
                 Icons.person, widget.edit ? widget.user.mobile: "mobile"),
 
-                textFormField(sexEditingController, "Sexo","En",
-                Icons.person, widget.edit ? widget.user.sex : "Sexo"),
+                textFormField(genderEditingController, "Gender","En",
+                Icons.person, widget.edit ? widget.user.gender : "Gender"),
 
                 textFormFieldNumber(ageEditingController, "Age","En",
                 Icons.person, widget.edit ? widget.user.age: "Age"),
@@ -109,8 +109,8 @@ class _AddEditUserState extends State<AddEditUser> {
                         email: emailEditingController.text,
                         password: passEditingController.text,
                         mobile: mobileEditingController.text,
-                        sex: sexEditingController.text,
-                        age: ageEditingController.text,
+                        gender: genderEditingController.text,
+                       // age: ageEditingController.text,
                       ));
                       Navigator.pop(context);
                     }
