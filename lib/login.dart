@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:proyectoubicua2019/PruebasBaseDatos/pruebaDB.dart';
+import 'package:proyectoubicua2019/registroEsclavo.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:proyectoubicua2019/colors.dart';
 import 'package:proyectoubicua2019/db/database.dart';
@@ -84,6 +85,10 @@ class LoginState extends State<Login> {
                     if (_formKey.currentState.validate()) {
                       var user = await PastilleroDataBaseProvider.db.getUserWithEmail(emailController.text);
                       if (user != null) {
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        setState(() {
+                          prefs.setInt('idParent', user.idUser);
+                        });
                         Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()),);
                       }
                       else {
@@ -152,5 +157,9 @@ class LoginState extends State<Login> {
     else {
       return null;
     }
+  }
+
+  _incrementCounter() async {
+
   }
 }

@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:proyectoubicua2019/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'db/database.dart';
 import 'model/usuario_model.dart';
 
-class Registro extends StatefulWidget {
+class RegistroEsclavo extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return RegistroState();
+    return RegistroEsclavoState();
   }
 }
 
-class RegistroState extends State<Registro> {
+class RegistroEsclavoState extends State<RegistroEsclavo> {
   TextEditingController nameEditingController = TextEditingController(); // para capturar datos
   TextEditingController lnameEditingController = TextEditingController(); 
   TextEditingController emailEditingController = TextEditingController(); 
@@ -27,7 +29,7 @@ class RegistroState extends State<Registro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Registro")),
+        appBar: AppBar(title: Text("Registro de esclavo")),
         body: Form(
           key: _formKay,
           child: SingleChildScrollView(
@@ -139,38 +141,25 @@ class RegistroState extends State<Registro> {
                       ),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    child: TextFormField(
-                      validator: validatePassword,
-                      controller: passEditingController,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Contraseña",
-                      ),
-                      obscureText: true,
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 10.0),
-                    child: TextFormField(
-                      validator: validatePassword,
-                      controller: pass2EditingController,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Repetir contraseña",
-                      ),
-                      obscureText: true,
-                    ),
-                  ),
                   MaterialButton(
                     elevation: 5,
                     onPressed: _createUser,
                     color: col_primary,
                     child: Text(
                       'Registrarse',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  MaterialButton(
+                    elevation: 5,
+                    onPressed: () async {
+                      final prefs = await SharedPreferences.getInstance();
+
+                      Fluttertoast.showToast(msg: prefs.getInt('idParent').toString(),toastLength: Toast.LENGTH_SHORT);
+                    },
+                    color: col_primary,
+                    child: Text(
+                      'id',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -199,6 +188,7 @@ class RegistroState extends State<Registro> {
   }
 
   void _createUser () async {
+    
     if(!_formKay.currentState.validate()){
       Scaffold.of(context).showSnackBar(
         SnackBar(content: Text("Procesing data"))
@@ -206,15 +196,16 @@ class RegistroState extends State<Registro> {
     }
     else {
       // Si no existe
+      final prefs = await SharedPreferences.getInstance();
       User s = new User(
         name: nameEditingController.text,
         lname: lnameEditingController.text,
         email: emailEditingController.text,
-        password: passEditingController.text,
+        password: "",
         mobile: mobileEditingController.text,
         gender: _gender,
         age: ageEditingController.text,
-        parent_id: 0,
+        parent_id: prefs.getInt('idParent')
       );
       //si no existe, entonces
       // If () ... { }
