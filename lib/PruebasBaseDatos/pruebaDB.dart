@@ -46,7 +46,7 @@ void didUpdateWidget(MyHomePage oldWidget){
           RaisedButton(
             color: Theme.of(context).primaryColor,
             onPressed: (){
-              PastilleroDataBaseProvider.db.deleteAllUser();
+              PastilleroDataBaseProvider.db.deleteAllReminder();
               setState(() {
                 
               });
@@ -62,26 +62,29 @@ void didUpdateWidget(MyHomePage oldWidget){
         ],
       ),
       body: 
-      FutureBuilder<List<User>>(
-        future: PastilleroDataBaseProvider.db.getAllUsers(),
-        builder: (BuildContext context, AsyncSnapshot<List<User>> snapshot){
+      FutureBuilder<List<Reminder>>(
+        future: PastilleroDataBaseProvider.db.getAllReminders(),
+        builder: (BuildContext context, AsyncSnapshot<List<Reminder>> snapshot){
           if(snapshot.hasData){
             return ListView.builder(
               physics: BouncingScrollPhysics(),
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index){
-                User item = snapshot.data[index];
+                Reminder item = snapshot.data[index];
+                
                 //delete one register for id
                 return Dismissible(
                   key: UniqueKey(),
-                  background: Container(color: Colors.red),
+                  background: Container(color: Colors.teal),
                   onDismissed: (diretion) {
-                   PastilleroDataBaseProvider.db.deleteReminderWithId(item.idUser);
+                   PastilleroDataBaseProvider.db.deleteReminderWithId(item.idReminder);
                   },
                   child: ListTile(
-                    title: Text(item.name),
-                    subtitle: Text(item.lname),
-                    leading: CircleAvatar(child: Text(item.idUser.toString())),
+                    title: Text("Medicamento:"+item.medicine + "       Usuario:" + item.idUser.toString()),
+                    subtitle: Text("Catntidad:" + item.quantity + "       Disponible:" + item.quantityAva + "         Frecuencia:" + item.frequency),
+                    leading:  ConstrainedBox(constraints: BoxConstraints(minWidth: 44,minHeight: 44,maxWidth: 64,maxHeight: 64,),
+                    child: Image.network('https://picsum.photos/250?image=9',),
+                    ),
                     //If we press one of the cards, it takes us to the page to edit, with the data onTap:
                     //This method is in the file add_editclient.dart
                     onTap: () {
@@ -89,12 +92,14 @@ void didUpdateWidget(MyHomePage oldWidget){
                         builder: (context) => AddEditUser(
                           true,
                           //Here is the record that we want to edit
-                          user: item,                          
+                                                   
                         )                        
                       )
                       );
                     },
+                  
                   ),
+                  
                 );
               },
             );

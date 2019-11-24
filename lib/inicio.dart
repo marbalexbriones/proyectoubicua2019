@@ -13,7 +13,7 @@ class Inicio extends StatelessWidget {
       "imagen": "assets/images/pastilla.jpg",
       "nombre": "Paracetamol",
       "dosis": "500 mg",
-      "tiempo": "8 horas",
+      "tiempo": "8 OO",
       "restantes": "25 restantes"
     },
     {

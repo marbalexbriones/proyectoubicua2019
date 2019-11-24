@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:proyectoubicua2019/colors.dart';
+import 'package:proyectoubicua2019/PruebasBaseDatos/pruebaDB.dart';
+
 import 'db/database.dart';
 import 'model/usuario_model.dart';
 
@@ -12,75 +15,73 @@ class Aniadir extends StatefulWidget {
 
 
 class AniadirState extends State<Aniadir> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  TextEditingController idUserEditingController = TextEditingController(); // para capturar datos
+  TextEditingController medicineEditingController = TextEditingController(); 
+  TextEditingController quantityEditingController = TextEditingController(); 
+  TextEditingController unitEditingController = TextEditingController(); 
+  TextEditingController regTimeEditingController = TextEditingController(); 
+  TextEditingController frecuencyEditingController = TextEditingController(); 
+  TextEditingController quanAvaEditingController = TextEditingController(); 
+  TextEditingController indicationEditingController = TextEditingController(); 
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
+  
+  final _formKay = GlobalKey<FormState>();
+  
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: 200.0,
-
-            actions: <Widget>[
-              IconButton(icon: Icon(Icons.save), onPressed: () {},),
-              IconButton(icon: Icon(Icons.delete), onPressed: () {},)
-            ],
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text("Aniadir",),
-              background: Image.network("https://cdn.forbes.com.mx/2019/07/medicina-pildoras-pastillas-cancer-640x360.jpg", fit: BoxFit.cover),
-            )
-          ),
-          SliverFillRemaining(
-            child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: Wrap(
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.only(bottom: 10.0),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: "Nombre Medicamento",
-                              hintText: "Paracetamol",
-                            ),
-                          ),
-                        ),
-                       
-                        Row(
+        appBar: AppBar(title: Text("Aniade Pastilla")),
+        body: Form(
+          key: _formKay,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(50.0, 100.0, 50.0, 0.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Center(
+                    child: Text("Aniade Pastilla",
+                      style: TextStyle(
+                        color: col_blue_gray,
+                        fontSize: 25,
+                        fontFamily: 'GoogleSans'),
+                    )),
+                  Container(
+                    padding: EdgeInsets.only(bottom: 5.0),
+                    child: TextFormField(
+                      controller: medicineEditingController,
+                      decoration: InputDecoration(
+                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                        labelText: "Nombre Medicamento",
+                        hintText: "Para ceta mol",
+                      ),
+                    ),
+                  ),
+                   Row(
                       children: <Widget>[
                         Expanded(
                           child:  Container(
                           padding: EdgeInsets.only(bottom: 10.0),
 
                           child: TextFormField(
+                            controller: quantityEditingController,
+                            keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               labelText: "Cantidad",
-                              hintText: "5000",
+                              hintText: "1",
                             ),
-                            
                           ),
-                          
-                          
                         ),
-
                         ),
                         Expanded(
                           child:  Container(
                           padding: EdgeInsets.only(bottom: 10.0,left: 10.0),
 
                           child: TextFormField(
+                            controller: unitEditingController,
+                            keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                               labelText: "Unidad",
                               hintText: "miligramos(mg)",
@@ -94,98 +95,115 @@ class AniadirState extends State<Aniadir> {
                         ),
                       ],
                     ),
-                        Container(
-                          padding: EdgeInsets.only(bottom: 10.0),
-                          child: TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                              labelText: "Frecuencia",
-                              hintText: "Cada 8 Horas",
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(bottom: 10.0),
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              labelText: "Cantidad Disponible",
-                              hintText: "25 Unidades",
-                            ),
-                            obscureText: true,
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(bottom: 10.0),
-                          child: TextFormField(
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              labelText: "Indicaciones Especiales",
-                              hintText: "Ninguna",
-                            ),
-                          ),
-                        ),
-                        
-                        Text("Ayuda"),
-                        Center(
-                          child: RaisedButton(
-                            color: Colors.cyanAccent,
-                            child: Text("Aceptar"),
-                            onPressed: (){},
-                          ),
-                        )
-                      ],
+                 
+                    Container(
+                    padding: EdgeInsets.only(bottom: 5.0),
+                    child: TextFormField(
+                      controller: regTimeEditingController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                        labelText: "Hora reg",
+                        hintText: "automatico del sistema",
+                      ),
                     ),
-                  ],
-                )
-              ),
-          )
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Perfil'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.alarm),
-            title: Text('Alarmas'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.contact_phone),
-            title: Text('Directorio'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.cyan,
-        onTap: _onItemTapped,
-      ),
-    );
-  }
-}
+                  ),
+                   Container(
+                    padding: EdgeInsets.only(bottom: 5.0),
+                    child: TextFormField(
+                      controller: frecuencyEditingController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                        labelText: "Frecuencia",
+                        hintText: "8hrs",
+                      ),
+                    ),
+                  ),
+                    Container(
+                    padding: EdgeInsets.only(bottom: 5.0),
+                    child: TextFormField(
+                      controller: quanAvaEditingController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                        labelText: "Disponibles",
+                        hintText: "25",
+                      ),
+                    ),
+                  ),
+                    Container(
+                    padding: EdgeInsets.only(bottom: 5.0),
+                    child: TextFormField(
+                      controller: indicationEditingController,
+                      decoration: InputDecoration(
+                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                        labelText: "Indicaciones",
+                        hintText: "Esta bien pendj",
+                      ),
+                    ),
+                  ),
+                  
+                  
+                  
+                  MaterialButton(
+                    elevation: 5,
+                    onPressed: _createReminder,
+                    color: col_primary,
+                    child: Text(
+                      'Aniade',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
 
-class PastillAppNavBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Perfil'),
+                   RaisedButton(
+            child: Text("pastillas"),
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Prueba()));
+            },
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.alarm),
-            title: Text('Alarmas'),
+                ],
+              )
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.contact_phone),
-            title: Text('Directorio'),
-          ),
-        ],
-        //currentIndex: _selectedIndex,
-        selectedItemColor: Colors.cyan,
-        //onTap: _onItemTapped,
-      );
+        ));
   }
+
+
+
+  void _createReminder () async {
+    if(!_formKay.currentState.validate()){
+      Scaffold.of(context).showSnackBar(
+        SnackBar(content: Text("Procesing data"))
+      );
+    }
+    else {
+      // Si no existe
+      Reminder r = new Reminder(
+        idUser: 1,
+        medicine: medicineEditingController.text,
+        quantity: quantityEditingController.text,
+        unit: unitEditingController.text,
+        regTime: regTimeEditingController.text,
+        frequency: frecuencyEditingController.text,
+        quantityAva: quantityEditingController.text,
+        indication: indicationEditingController.text,
+      );
+      
+       await PastilleroDataBaseProvider.db.addReminderToDatabase(r);
+        Navigator.pop(context);
+      
+    }
+  }
+
+ 
+
+
+
+
+  
+
+
+ 
 }
