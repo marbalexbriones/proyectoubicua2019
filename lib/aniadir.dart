@@ -14,18 +14,19 @@ class Aniadir extends StatefulWidget {
 }
 
 class AniadirState extends State<Aniadir> {
-  TextEditingController idUserEditingController =
-      TextEditingController(); // para capturar datos
-  TextEditingController medicineEditingController = TextEditingController();
-  TextEditingController quantityEditingController = TextEditingController();
-  TextEditingController unitEditingController = TextEditingController();
-  TextEditingController regTimeEditingController = TextEditingController();
-  TextEditingController frecuencyEditingController = TextEditingController();
-  TextEditingController quanAvaEditingController = TextEditingController();
-  TextEditingController indicationEditingController = TextEditingController();
+  TextEditingController idUserEditingController = TextEditingController(); // para capturar datos
+  TextEditingController medicineEditingController = TextEditingController(); 
+  TextEditingController quantityEditingController = TextEditingController(); 
+  TextEditingController unitEditingController = TextEditingController(); 
+  TextEditingController regTimeEditingController = TextEditingController(); 
+  TextEditingController frecuencyEditingController = TextEditingController(); 
+  TextEditingController quanAvaEditingController = TextEditingController(); 
+  TextEditingController indicationEditingController = TextEditingController(); 
 
+  
   final _formKay = GlobalKey<FormState>();
-
+  
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,11 +158,15 @@ class AniadirState extends State<Aniadir> {
         ));
   }
 
-  void _createReminder() async {
-    if (!_formKay.currentState.validate()) {
-      Scaffold.of(context)
-          .showSnackBar(SnackBar(content: Text("Procesing data")));
-    } else {
+
+
+  void _createReminder () async {
+    if(!_formKay.currentState.validate()){
+      Scaffold.of(context).showSnackBar(
+        SnackBar(content: Text("Procesing data"))
+      );
+    }
+    else {
       // Si no existe
       Reminder r = new Reminder(
         idUser: 1,
@@ -178,4 +183,14 @@ class AniadirState extends State<Aniadir> {
       Navigator.pop(context);
     }
   }
+
+ 
+
+
+
+
+  
+
+
+ 
 }
