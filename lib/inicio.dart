@@ -1,3 +1,5 @@
+import 'package:proyectoubicua2019/aniadir.dart';
+
 import 'drawer.dart';
 import 'pastillas.dart';
 import 'directorio.dart';
@@ -126,6 +128,8 @@ class Inicio extends StatelessWidget {
                 floatingActionButton: FloatingActionButton(
                   child: Icon(Icons.add),
                   onPressed: () {
+                     Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Aniadir()));
                     // Add your onPressed code here!
                   },
                   splashColor: col_primary,
