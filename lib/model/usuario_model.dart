@@ -77,10 +77,9 @@ class Reminder{
         medicine: json ["medicine"],
         quantity: json ["quantity"],
         unit: json ["unit"],
-        regTime: json["RegTime"],
+        regTime: json["RegTime"],/*revisar */
         frequency: json ["frequency"],
         quantityAva: json ["quantityAva"],
         indication: json ["indication"],
-        
     );
 }
