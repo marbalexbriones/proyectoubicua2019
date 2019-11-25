@@ -258,8 +258,10 @@ class RegistroEsclavoState extends State<RegistroEsclavo> {
         }
         else {
           // Si no existe
+          List<User> lista=  await PastilleroDataBaseProvider.db.getAllUsers();
           final prefs = await SharedPreferences.getInstance();
           User s = new User(
+              idUser:lista.length+1,
               name: nameEditingController.text,
               lname: lnameEditingController.text,
               email: emailEditingController.text,
