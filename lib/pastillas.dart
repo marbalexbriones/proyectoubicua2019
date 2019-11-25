@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proyectoubicua2019/model/usuario_model.dart';
 import 'package:proyectoubicua2019/db/database.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Pastillas extends StatelessWidget {
   //var dataSource;
@@ -38,8 +39,10 @@ class Pastillas extends StatelessWidget {
                         item.medicine,
                         item.quantity + " " + item.unit,
                         "cada " + item.frequency + " horas",
-                        item.quantityAva + " disponible",
-                        context)
+                        item.quantityAva,
+                        item.idReminder,
+                        context,
+                        item)
 
                     /*ListTile(
                     title: Text("Medicamento:" +
@@ -101,8 +104,15 @@ class Pastillas extends StatelessWidget {
 
 //CELDAS DE INICIO
 
-Widget customCard(String imagen, String nombre, String dosis, String time,
-        String restantes, BuildContext context) =>
+Widget customCard(
+        String imagen,
+        String nombre,
+        String dosis,
+        String time,
+        String restantes,
+        int idPastilla,
+        BuildContext context,
+        Reminder reminder) =>
     Padding(
       padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
       child: Center(
@@ -114,7 +124,12 @@ Widget customCard(String imagen, String nombre, String dosis, String time,
                 child: Column(
                   children: <Widget>[
                     Text(nombre),
-                    Text(dosis + " | " + time + " | " + restantes),
+                    Text(dosis +
+                        " | " +
+                        time +
+                        " | " +
+                        restantes +
+                        " disponibles."),
                   ],
                 ),
               ),
@@ -125,11 +140,23 @@ Widget customCard(String imagen, String nombre, String dosis, String time,
                     minWidth: 30.0,
                     height: 30.0,
                     elevation: 5,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Inicio()),
-                      );
+                    onPressed: () async {
+                      int rest = int.parse(restantes);
+                      if (rest == 1) {
+                        rest = rest - 1;
+                        print(rest);
+                        reminder.quantityAva = rest.toString();
+                        PastilleroDataBaseProvider.db.updateReminder(reminder);
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Inicio()),
+                        );
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: 'Ya no quedan pastillas disponibles. Edita la cantidad disponible cuando adquieras más medicamento',
+                            toastLength: Toast.LENGTH_SHORT);
+                      }
                     },
                     color: col_primary,
                     child: Text(

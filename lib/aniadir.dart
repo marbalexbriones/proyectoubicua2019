@@ -141,7 +141,7 @@ class AniadirState extends State<Aniadir> {
                       onPressed: _createReminder,
                       color: col_primary,
                       child: Text(
-                        'Aniade',
+                        'Añadir',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -175,7 +175,7 @@ class AniadirState extends State<Aniadir> {
         unit: unitEditingController.text,
         regTime: regTimeEditingController.text,
         frequency: frecuencyEditingController.text,
-        quantityAva: quantityEditingController.text,
+        quantityAva: quanAvaEditingController.text,
         indication: indicationEditingController.text,
       );
 
