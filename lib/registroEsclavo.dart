@@ -29,145 +29,197 @@ class RegistroEsclavoState extends State<RegistroEsclavo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Registro de esclavo")),
-        body: Form(
-          key: _formKay,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(50.0, 100.0, 50.0, 0.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Center(
-                    child: Text("Iniciar Sesión",
-                      style: TextStyle(
-                        color: col_blue_gray,
-                        fontSize: 25,
-                        fontFamily: 'GoogleSans'),
-                    )),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    child: TextFormField(
-                      validator: validateName,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Nombre",
-                        hintText: "Ej. Juan",
+      appBar: AppBar(title: Text("Registro de esclavo")),
+      body: Form(
+        key: _formKay,
+        child: SingleChildScrollView(
+
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        height: 150,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+
+                            colorFilter: new ColorFilter.mode(Colors.blue
+                                .withOpacity(1.0), BlendMode.darken),
+                            image: AssetImage('assets/images/messi.jpg',),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 80),
+                          child: Row(children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(left: 20, bottom: 25),),
+                            Container(
+                              padding: EdgeInsets.only(right: 100),
+                              width: 70,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/messi2.jpg'),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 5,
+                                  )
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20, bottom: 25),),
+                            Text("Nombre Usuario", style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold),),
+                          ],),
+                        ),
+
                       ),
-                      controller: nameEditingController,
+                    )
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.only(left: 200),),
+                    Container(
+                      width: 100,
+
+
+                    ),
+
+                    FloatingActionButton(
+                      onPressed: _createEsclavo,
+                      child: Icon(Icons.save),
+                      backgroundColor: Colors.yellow,
+                    ),
+
+                  ],
+                ),
+
+
+                Container(
+                  padding: EdgeInsets.only(left: 12),
+                  child: TextFormField(
+                    validator: validateName,
+                    decoration: InputDecoration(
+                      labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                      labelText: "Nombre",
+                      hintText: "Ej. Juan",
+                    ),
+                    controller: nameEditingController,
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 12),
+                  child: TextFormField(
+                    validator: validateLName,
+                    controller: lnameEditingController,
+                    decoration: InputDecoration(
+                      labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                      labelText: "Apellido",
+                      hintText: "Ej. Peres",
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    child: TextFormField(
-                      validator: validateLName,
-                      controller: lnameEditingController,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Apellido",
-                        hintText: "Ej. Peres",
-                      ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 12),
+                  child: TextFormField(
+                    validator: validateEmail,
+                    controller: emailEditingController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                      labelText: "Correo",
+                      hintText: "correo@ejemplo.com",
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    child: TextFormField(
-                      validator: validateEmail,
-                      controller: emailEditingController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Correo",
-                        hintText: "correo@ejemplo.com",
-                      ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 12),
+                  child: TextFormField(
+                    validator: validateNumber,
+                    controller: mobileEditingController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                      labelText: "Telefono",
+                      hintText: "1234567890",
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    child: TextFormField(
-                      validator: validateNumber,
-                      controller: mobileEditingController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Telefono",
-                        hintText: "1234567890",
-                      ),
-                    ),
-                  ),
-                  Text(
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 12, top: 10),
+                  child: Text(
+
                     "Genero",
                     style: TextStyle(
-                    color: col_blue_gray,
-                    fontSize: 20,
-                    fontFamily: 'GoogleSans'),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      new Radio(
-                        value: 0,
-                        groupValue: _radioValue1,
-                        onChanged: _handleRadioValueChange1,
-                      ),
-                      new Text(
-                        'Masculino',
-                        style: new TextStyle(fontSize: 16.0),
-                      ),
-                      new Radio(
-                        value: 1,
-                        groupValue: _radioValue1,
-                        onChanged: _handleRadioValueChange1,
-                      ),
-                      new Text(
-                        'Femenino',
-                        style: new TextStyle(
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    child: TextFormField(
-                      validator: validateAge,
-                      controller: ageEditingController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Edad",
-                        hintText: "0 - 100",
+                        color: col_blue_gray,
+                        fontSize: 20,
+                        fontFamily: 'GoogleSans'),
+                  ),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    new Radio(
+                      value: 0,
+                      groupValue: _radioValue1,
+                      onChanged: _handleRadioValueChange1,
+                    ),
+                    new Text(
+                      'Masculino',
+                      style: new TextStyle(fontSize: 16.0),
+                    ),
+                    new Radio(
+                      value: 1,
+                      groupValue: _radioValue1,
+                      onChanged: _handleRadioValueChange1,
+                    ),
+                    new Text(
+                      'Femenino',
+                      style: new TextStyle(
+                        fontSize: 16.0,
                       ),
                     ),
-                  ),
-                  MaterialButton(
-                    elevation: 5,
-                    onPressed: _createUser,
-                    color: col_primary,
-                    child: Text(
-                      'Registrarse',
-                      style: TextStyle(color: Colors.white),
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 12),
+                  child: TextFormField(
+                    validator: validateAge,
+                    controller: ageEditingController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                      labelText: "Edad",
+                      hintText: "0 - 100",
                     ),
                   ),
-                  MaterialButton(
-                    elevation: 5,
-                    onPressed: () async {
-                      final prefs = await SharedPreferences.getInstance();
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 12),
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                        labelText: "Comentarios",
+                        hintText: "Asma hereditaria,Alergia: al gluten"
+                    ),
+                  ),
+                ),
 
-                      Fluttertoast.showToast(msg: prefs.getInt('idParent').toString(),toastLength: Toast.LENGTH_SHORT);
-                    },
-                    color: col_primary,
-                    child: Text(
-                      'id',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              )
-            ),
-          ),
-        ));
+              ],
+            )
+        ),
+      ),
+    );
   }
 
   void _handleRadioValueChange1(int value) {
@@ -187,35 +239,52 @@ class RegistroEsclavoState extends State<RegistroEsclavo> {
     });
   }
 
-  void _createUser () async {
-    
-    if(!_formKay.currentState.validate()){
-      Scaffold.of(context).showSnackBar(
-        SnackBar(content: Text("Procesing data"))
-      );
-    }
-    else {
-      // Si no existe
-      final prefs = await SharedPreferences.getInstance();
-      User s = new User(
-        name: nameEditingController.text,
-        lname: lnameEditingController.text,
-        email: emailEditingController.text,
-        password: "",
-        mobile: mobileEditingController.text,
-        gender: _gender,
-        age: ageEditingController.text,
-        parent_id: prefs.getInt('idParent')
-      );
-      //si no existe, entonces
-      // If () ... { }
-      var user = await PastilleroDataBaseProvider.db.getUserWithEmail(s.email);
-      if (user == null) {
-        await PastilleroDataBaseProvider.db.addUserToDatabase(s);
-        Navigator.pop(context);
+  void _createEsclavo () async {
+
+    if ( _formKay.currentState.validate()) {
+      var user = await PastilleroDataBaseProvider.db.getUserWithEmail(
+          emailEditingController.text);
+      if (user != null) {
+        Scaffold.of(context).showSnackBar(
+            SnackBar(content: Text("Procesing data"))
+        );
+      }
+      else {
+        // Si no existe
+        if (!_formKay.currentState.validate()) {
+          Scaffold.of(context).showSnackBar(
+              SnackBar(content: Text("Procesing data"))
+          );
+        }
+        else {
+          // Si no existe
+          final prefs = await SharedPreferences.getInstance();
+          User s = new User(
+              name: nameEditingController.text,
+              lname: lnameEditingController.text,
+              email: emailEditingController.text,
+              password: "",
+              mobile: mobileEditingController.text,
+              gender: _gender,
+              age: ageEditingController.text,
+              parent_id: prefs.getInt('idParent')
+          );
+          //si no existe, entonces
+          // If () ... { }
+          var user = await PastilleroDataBaseProvider.db.getUserWithEmail(
+              s.email);
+          if (user == null) {
+            await PastilleroDataBaseProvider.db.addUserToDatabase(s);
+            Navigator.pop(context);
+            print(Text("Lo agrego"));
+            print(s.parent_id);
+          }
+        }
       }
     }
   }
+
+
 
   String validatePassword(String value) {
     if (value.length < 8) {
@@ -271,5 +340,7 @@ class RegistroEsclavoState extends State<RegistroEsclavo> {
       return null;
     }
   }
-}
+  }
+
+
 

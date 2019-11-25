@@ -73,12 +73,13 @@ class LoginState extends State<Login> {
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
-                child: MaterialButton(
+                child: MaterialButton(s
                   minWidth: 100.0,
                   height: 40.0,
                   elevation: 5,
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
+
                       var user = await PastilleroDataBaseProvider.db.getUserWithEmail(emailController.text);
                       if (user != null) {
                         if (user.password.toString() == passwordController.text.toString()) {
