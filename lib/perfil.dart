@@ -10,15 +10,9 @@ class Perfil extends StatefulWidget {
 
 
 class PerfilState extends State<Perfil> {
-  int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

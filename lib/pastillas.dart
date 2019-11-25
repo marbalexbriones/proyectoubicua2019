@@ -9,38 +9,41 @@ import 'package:proyectoubicua2019/model/usuario_model.dart';
 import 'package:proyectoubicua2019/db/database.dart';
 
 class Pastillas extends StatelessWidget {
-  var dataSource;
-  Pastillas({Key key, @required this.dataSource}) : super(key: key);
+  //var dataSource;
+  //Pastillas({Key key, @required this.dataSource}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Reminder>>(
-      future: PastilleroDataBaseProvider.db.getAllReminders(),
-      builder: (BuildContext context, AsyncSnapshot<List<Reminder>> snapshot) {
-        if (snapshot.hasData) {
-          return ListView.builder(
-            physics: BouncingScrollPhysics(),
-            itemCount: snapshot.data.length,
-            itemBuilder: (BuildContext context, int index) {
-              Reminder item = snapshot.data[index];
+    return Padding(
+      padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+      child: FutureBuilder<List<Reminder>>(
+        future: PastilleroDataBaseProvider.db.getAllReminders(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Reminder>> snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              physics: BouncingScrollPhysics(),
+              itemCount: snapshot.data.length,
+              itemBuilder: (BuildContext context, int index) {
+                Reminder item = snapshot.data[index];
 
-              //delete one register for id
-              return Dismissible(
-                  key: UniqueKey(),
-                  background: Container(color: Colors.teal),
-                  onDismissed: (diretion) {
-                    PastilleroDataBaseProvider.db
-                        .deleteReminderWithId(item.idReminder);
-                  },
-                  child: customCard(
-                      "assets/images/pastilla.png",
-                      item.medicine,
-                      item.quantity + " " + item.unit,
-                      "cada " + item.frequency + " horas",
-                      item.quantityAva + " disponible",
-                      context)
+                //delete one register for id
+                return Dismissible(
+                    key: UniqueKey(),
+                    background: Container(color: Colors.teal),
+                    onDismissed: (diretion) {
+                      PastilleroDataBaseProvider.db
+                          .deleteReminderWithId(item.idReminder);
+                    },
+                    child: customCard(
+                        "assets/images/pastilla.png",
+                        item.medicine,
+                        item.quantity + " " + item.unit,
+                        "cada " + item.frequency + " horas",
+                        item.quantityAva + " disponible",
+                        context)
 
-                  /*ListTile(
+                    /*ListTile(
                     title: Text("Medicamento:" +
                         item.medicine +
                         "       Usuario:" +
@@ -72,13 +75,14 @@ class Pastillas extends StatelessWidget {
                               )));
                     },
                   ),*/
-                  );
-            },
-          );
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
-      },
+                    );
+              },
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
     );
 
     /*return GridView.count(
@@ -102,7 +106,7 @@ class Pastillas extends StatelessWidget {
 Widget customCard(String imagen, String nombre, String dosis, String time,
         String restantes, BuildContext context) =>
     Padding(
-      padding: EdgeInsets.all(5.0),
+      padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
       child: Center(
         child: Card(
           child: Column(

@@ -10,37 +10,6 @@ import 'perfil.dart';
 
 class Inicio extends StatelessWidget {
 
-  final example = [
-    {
-      "imagen": "assets/images/pastilla.png",
-      "nombre": "Paracetamol",
-      "dosis": "500 mg",
-      "tiempo": "8 OO",
-      "restantes": "25 restantes"
-    },
-    {
-      "imagen": "assets/images/pastilla.png",
-      "nombre": "Paracetamol",
-      "dosis": "500 mg",
-      "tiempo": "8 horas",
-      "restantes": "25 restantes"
-    },
-    {
-      "imagen": "assets/images/pastilla.png",
-      "nombre": "Paracetamol",
-      "dosis": "500 mg",
-      "tiempo": "8 horas",
-      "restantes": "25 restantes"
-    },
-    {
-      "imagen": "assets/images/pastilla.png",
-      "nombre": "Paracetamol",
-      "dosis": "500 mg",
-      "tiempo": "8 horas",
-      "restantes": "25 restantes"
-    }
-  ];
-
   final doctors = [
     {
       "imagen": "assets/images/doctor.png",
@@ -124,7 +93,7 @@ class Inicio extends StatelessWidget {
               ),
               //Perfil(),
               new Scaffold(
-                body: Pastillas(dataSource: example),
+                body: Pastillas(),
                 floatingActionButton: FloatingActionButton(
                   child: Icon(Icons.add),
                   onPressed: () {
