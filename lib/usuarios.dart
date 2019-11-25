@@ -11,7 +11,7 @@ final users = [
 ];
 
 class Usuarios extends StatelessWidget {
-  var dataSource = users;
+  final dataSource = users;
   //Usuarios({Key key, @required this.dataSource}) : super(key: key);
 
   @override

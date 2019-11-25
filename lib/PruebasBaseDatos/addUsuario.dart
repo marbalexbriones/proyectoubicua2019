@@ -136,6 +136,7 @@ class _AddEditUserState extends State<AddEditUser> {
             if (value.isEmpty) {
               return 'Please enter some text';
             }
+            return null;
           },
           controller: t,
           //keyboardType: TextInputType.number,
@@ -161,6 +162,7 @@ class _AddEditUserState extends State<AddEditUser> {
             if (value.isEmpty) {
               return 'Please enter some text';
             }
+            return null;
           },
           controller: t,
           keyboardType: TextInputType.number,

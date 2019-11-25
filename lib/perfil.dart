@@ -19,10 +19,14 @@ class Perfil extends StatefulWidget {
 }
 
 class PerfilState extends State<Perfil> {
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
+  Future<User> user;
+  static const TextStyle optionStyle = TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
 
-
+  @override
+  void initState() {
+    super.initState();
+    user = getUser();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

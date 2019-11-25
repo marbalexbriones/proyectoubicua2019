@@ -10,15 +10,15 @@ class Anadiresclavo extends StatefulWidget {
 
 
 class AnadiresclavoState extends State<Anadiresclavo> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
+  // int _selectedIndex = 0;
+  // static const TextStyle optionStyle =
+  // TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

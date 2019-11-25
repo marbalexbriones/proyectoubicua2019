@@ -10,7 +10,6 @@ import 'package:proyectoubicua2019/aniadir.dart';
 import 'package:proyectoubicua2019/editar.dart';
 import 'package:proyectoubicua2019/AcercaDe.dart';
 import 'package:proyectoubicua2019/Ayuda.dart';
-import 'package:sqflite/sqflite.dart';
 
 void main() {
   runApp(new MaterialApp(

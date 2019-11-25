@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Directorio extends StatelessWidget {
-  var dataSource;
+  final dataSource;
   Directorio({Key key, @required this.dataSource}) : super(key: key);
 
   @override
