@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proyectoubicua2019/colors.dart';
+import 'package:proyectoubicua2019/model/usuario_model.dart' as prefix0;
 
 import 'db/database.dart';
 import 'model/usuario_model.dart';
@@ -206,7 +207,9 @@ class RegistroState extends State<Registro> {
     }
     else {
       // Si no existe
+      List<User> lista=  await PastilleroDataBaseProvider.db.getAllUsers();
       User s = new User(
+        idUser:lista.length+1,
         name: nameEditingController.text,
         lname: lnameEditingController.text,
         email: emailEditingController.text,
@@ -214,7 +217,7 @@ class RegistroState extends State<Registro> {
         mobile: mobileEditingController.text,
         gender: _gender,
         age: ageEditingController.text,
-        parent_id: 0,
+        parent_id: lista.length+1,
       );
       //si no existe, entonces
       // If () ... { }

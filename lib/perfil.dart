@@ -31,9 +31,9 @@ class PerfilState extends State<Perfil> {
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-    Row(children: <Widget>[
-    Expanded(
-    child:Container(
+      Row(children: <Widget>[
+        Expanded(
+          child:Container(
     height: 150,
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -43,9 +43,9 @@ class PerfilState extends State<Perfil> {
           fit:BoxFit.cover,
         ),
       ),
-      child: Padding(
+            child: Padding(
         padding: EdgeInsets.only(top: 80),
-        child: Row(children: <Widget>[
+              child: Row(children: <Widget>[
           Padding(padding: EdgeInsets.only(left: 20,bottom:25),),
           Container(
             padding: EdgeInsets.only(right: 100),

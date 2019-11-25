@@ -82,8 +82,9 @@ class LoginState extends State<Login> {
                   height: 40.0,
                   elevation: 5,
                   onPressed: () async {
-                    
+
                     if (_formKey.currentState.validate()) {
+
                       var user = await PastilleroDataBaseProvider.db.getUserWithEmail(emailController.text);
                       if (user != null) {
                         SharedPreferences prefs = await SharedPreferences.getInstance();

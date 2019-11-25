@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:proyectoubicua2019/registroEsclavo.dart';
 
 final users = [
   {
@@ -32,7 +33,7 @@ class Usuarios extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          // Add your onPressed code here!
+          Navigator.push(context, MaterialPageRoute(builder: (context) => RegistroEsclavo()),);
         },
         splashColor: col_primary,
         backgroundColor: col_primary,
