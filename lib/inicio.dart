@@ -1,3 +1,5 @@
+import 'package:proyectoubicua2019/aniadir.dart';
+
 import 'drawer.dart';
 import 'pastillas.dart';
 import 'directorio.dart';
@@ -10,28 +12,28 @@ class Inicio extends StatelessWidget {
 
   final example = [
     {
-      "imagen": "assets/images/pastilla.jpg",
+      "imagen": "assets/images/pastilla.png",
       "nombre": "Paracetamol",
       "dosis": "500 mg",
       "tiempo": "8 OO",
       "restantes": "25 restantes"
     },
     {
-      "imagen": "assets/images/pastilla.jpg",
+      "imagen": "assets/images/pastilla.png",
       "nombre": "Paracetamol",
       "dosis": "500 mg",
       "tiempo": "8 horas",
       "restantes": "25 restantes"
     },
     {
-      "imagen": "assets/images/pastilla.jpg",
+      "imagen": "assets/images/pastilla.png",
       "nombre": "Paracetamol",
       "dosis": "500 mg",
       "tiempo": "8 horas",
       "restantes": "25 restantes"
     },
     {
-      "imagen": "assets/images/pastilla.jpg",
+      "imagen": "assets/images/pastilla.png",
       "nombre": "Paracetamol",
       "dosis": "500 mg",
       "tiempo": "8 horas",
@@ -41,37 +43,37 @@ class Inicio extends StatelessWidget {
 
   final doctors = [
     {
-      "imagen": "assets/images/pastilla.jpg",
+      "imagen": "assets/images/doctor.png",
       "nombre": "Juan Carlos",
       "lugar": "San Luis Potosí",
       "telefono": "44421231234"
     },
     {
-      "imagen": "assets/images/pastilla.jpg",
+      "imagen": "assets/images/doctor.png",
       "nombre": "Juan Carlos",
       "lugar": "San Luis Potosí",
       "telefono": "44421231234"
     },
     {
-      "imagen": "assets/images/pastilla.jpg",
+      "imagen": "assets/images/doctor.png",
       "nombre": "Juan Carlos",
       "lugar": "San Luis Potosí",
       "telefono": "44421231234"
     },
     {
-      "imagen": "assets/images/pastilla.jpg",
+      "imagen": "assets/images/doctor.png",
       "nombre": "Juan Carlos",
       "lugar": "San Luis Potosí",
       "telefono": "44421231234"
     },
     {
-      "imagen": "assets/images/pastilla.jpg",
+      "imagen": "assets/images/doctor.png",
       "nombre": "Juan Carlos",
       "lugar": "San Luis Potosí",
       "telefono": "44421231234"
     },
     {
-      "imagen": "assets/images/pastilla.jpg",
+      "imagen": "assets/images/doctor.png",
       "nombre": "Juan Carlos",
       "lugar": "San Luis Potosí",
       "telefono": "44421231234"
@@ -126,7 +128,8 @@ class Inicio extends StatelessWidget {
                 floatingActionButton: FloatingActionButton(
                   child: Icon(Icons.add),
                   onPressed: () {
-                    // Add your onPressed code here!
+                    Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Aniadir()));
                   },
                   splashColor: col_primary,
                   backgroundColor: col_primary,

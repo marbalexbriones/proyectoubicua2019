@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 
 final users = [
   {
-    "imagen": "assets/images/pastilla.jpg",
+    "imagen": "assets/images/user.png",
     "nombre": "Juan Carlos",
   },
 ];

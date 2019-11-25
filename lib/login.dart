@@ -25,7 +25,6 @@ class LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   bool _autovalidate = false;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +42,7 @@ class LoginState extends State<Login> {
               ),
               SizedBox(height: 5.0),
               Center(
-                child: Text(
+                  child: Text(
                 "Iniciar Sesión",
                 style: TextStyle(
                     color: col_blue_gray,
@@ -74,7 +73,6 @@ class LoginState extends State<Login> {
                   validator: validatePassword,
                 ),
               ),
- 
               Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
                 child: MaterialButton(
@@ -82,18 +80,23 @@ class LoginState extends State<Login> {
                   height: 40.0,
                   elevation: 5,
                   onPressed: () async {
-                    
                     if (_formKey.currentState.validate()) {
-                      var user = await PastilleroDataBaseProvider.db.getUserWithEmail(emailController.text);
+                      var user = await PastilleroDataBaseProvider.db
+                          .getUserWithEmail(emailController.text);
                       if (user != null) {
-                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
                         setState(() {
                           prefs.setInt('idParent', user.idUser);
                         });
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()),);
-                      }
-                      else {
-                        Fluttertoast.showToast(msg: 'Incorrecto !',toastLength: Toast.LENGTH_SHORT);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Inicio()),
+                        );
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: 'Incorrecto !',
+                            toastLength: Toast.LENGTH_SHORT);
                       }
                     }
                     return null;
@@ -105,7 +108,25 @@ class LoginState extends State<Login> {
                   ),
                 ),
               ),
-              
+              Padding(
+                padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
+                child: MaterialButton(
+                  minWidth: 100.0,
+                  height: 40.0,
+                  elevation: 5,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Inicio()),
+                    );
+                  },
+                  color: col_primary,
+                  child: Text(
+                    'Accede Sin loginr',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                 child: Row(
@@ -142,8 +163,7 @@ class LoginState extends State<Login> {
   String validatePassword(String value) {
     if (value.length < 8) {
       return 'Verifica tus datos';
-    }
-    else {
+    } else {
       return null;
     }
   }
@@ -154,13 +174,10 @@ class LoginState extends State<Login> {
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value)) {
       return 'Verifica tus datos';
-    }
-    else {
+    } else {
       return null;
     }
   }
 
-  _incrementCounter() async {
-
-  }
+  _incrementCounter() async {}
 }
