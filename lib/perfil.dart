@@ -46,7 +46,7 @@ class PerfilState extends State<Perfil> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             colorFilter: new ColorFilter.mode(Colors.blue.withOpacity(1.0), BlendMode.darken),
-                            image: AssetImage('assets/images/messi.jpg',),
+                            image: AssetImage('assets/images/user_bg.jpg',),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -61,7 +61,7 @@ class PerfilState extends State<Perfil> {
                                 height: 100,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage('assets/images/messi2.jpg'),
+                                    image: AssetImage('assets/images/user.png'),
                                     fit: BoxFit.cover,
                                   ),
                                   shape: BoxShape.circle,

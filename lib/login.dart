@@ -79,22 +79,22 @@ class LoginState extends State<Login> {
                   elevation: 5,
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
-                      var user = await PastilleroDataBaseProvider.db
-                          .getUserWithEmail(emailController.text);
+                      var user = await PastilleroDataBaseProvider.db.getUserWithEmail(emailController.text);
                       if (user != null) {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        setState(() {
-                          prefs.setInt('idParent', user.idUser);
-                        });
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Inicio()),
-                        );
-                      } else {
-                        Fluttertoast.showToast(
-                            msg: 'Incorrecto !',
-                            toastLength: Toast.LENGTH_SHORT);
+                        if (user.password.toString() == passwordController.text.toString()) {
+                          SharedPreferences prefs =await SharedPreferences.getInstance();
+                          setState(() {
+                            prefs.setInt('idParent', user.idUser);
+                          });
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()),
+                          );
+                        }
+                        else {
+                          Fluttertoast.showToast(msg: 'Incorrecto !', toastLength: Toast.LENGTH_SHORT);
+                        }
+                      } 
+                      else {
+                        Fluttertoast.showToast(msg: 'Incorrecto !', toastLength: Toast.LENGTH_SHORT);
                       }
                     }
                     return null;
