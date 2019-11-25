@@ -29,7 +29,7 @@ class Pastillas extends StatelessWidget {
                 //delete one register for id
                 return Dismissible(
                     key: UniqueKey(),
-                    background: Container(color: Colors.teal),
+                    background: Container(color: col_blue_gray),
                     onDismissed: (diretion) {
                       PastilleroDataBaseProvider.db
                           .deleteReminderWithId(item.idReminder);
@@ -142,7 +142,7 @@ Widget customCard(
                     elevation: 5,
                     onPressed: () async {
                       int rest = int.parse(restantes);
-                      if (rest == 1) {
+                      if (rest >= 1) {
                         rest = rest - 1;
                         print(rest);
                         reminder.quantityAva = rest.toString();
