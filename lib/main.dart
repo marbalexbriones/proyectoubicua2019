@@ -5,11 +5,13 @@ import 'package:proyectoubicua2019/registro.dart';
 import 'package:proyectoubicua2019/perfil.dart';
 import 'package:proyectoubicua2019/colors.dart';
 import 'package:proyectoubicua2019/aviso.dart';
+import 'package:proyectoubicua2019/inicio.dart';
 import 'package:proyectoubicua2019/login.dart';
 import 'package:proyectoubicua2019/aniadir.dart';
 import 'package:proyectoubicua2019/editar.dart';
 import 'package:proyectoubicua2019/AcercaDe.dart';
 import 'package:proyectoubicua2019/Ayuda.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -27,6 +29,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+
   Widget build(BuildContext context) {
     return new SplashScreen(
       seconds: 2,

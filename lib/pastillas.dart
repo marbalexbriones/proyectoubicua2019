@@ -133,6 +133,17 @@ Widget customCard(
                   ],
                 ),
               ),
+              Center(
+                child: Text("Última toma: " +
+                    getDateWithFormat(
+                        DateTime.parse(reminder.regTime).toString())),
+              ),
+              Center(
+                child: Text("Siguiente toma: " +
+                    getDateWithFormat(DateTime.parse(reminder.regTime)
+                        .add(new Duration(hours: int.parse(reminder.frequency)))
+                        .toString())),
+              ),
               ButtonBar(
                 alignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -144,8 +155,10 @@ Widget customCard(
                       int rest = int.parse(restantes);
                       if (rest >= 1) {
                         rest = rest - 1;
-                        print(rest);
+                        setAlarm(
+                            reminder.regTime, int.parse(reminder.frequency));
                         reminder.quantityAva = rest.toString();
+                        reminder.regTime = new DateTime.now().toString();
                         PastilleroDataBaseProvider.db.updateReminder(reminder);
                         Navigator.pop(context);
                         Navigator.push(
@@ -154,7 +167,8 @@ Widget customCard(
                         );
                       } else {
                         Fluttertoast.showToast(
-                            msg: 'Ya no quedan pastillas disponibles. Edita la cantidad disponible cuando adquieras más medicamento',
+                            msg:
+                                'Ya no quedan pastillas disponibles. Edita la cantidad disponible cuando adquieras más medicamento',
                             toastLength: Toast.LENGTH_SHORT);
                       }
                     },
@@ -187,3 +201,55 @@ Widget customCard(
         ),
       ),
     );
+
+getDateWithFormat(String time) {
+  var date = DateTime.parse(time);
+  var day;
+  switch (date.weekday) {
+    case 1:
+      day = "Lunes";
+      break;
+    case 2:
+      day = "Martes";
+      break;
+    case 3:
+      day = "Miércoles";
+      break;
+    case 4:
+      day = "Jueves";
+      break;
+    case 5:
+      day = "Viernes";
+      break;
+    case 6:
+      day = "Sábado";
+      break;
+    case 7:
+      day = "Domingo";
+      break;
+  }
+
+  var hour = date.hour;
+  var minute = date.minute.toString();
+  var am = "a.m.";
+  if (hour > 12) {
+    hour -= 12;
+    am = "p.m.";
+  } else if (hour == 12) {
+    am = "p.m.";
+  }
+
+  if (minute.toString().length == 1) {
+    minute = "0" + minute;
+  }
+
+  return day + " a las " + hour.toString() + ":" + minute + am;
+}
+
+setAlarm(String time, int lapse) {
+  var date = DateTime.parse(time).add(new Duration(hours: lapse));
+  Fluttertoast.showToast(
+      msg: 'Siguiente alarma programada para el ' +
+          getDateWithFormat(date.toString()),
+      toastLength: Toast.LENGTH_SHORT);
+}

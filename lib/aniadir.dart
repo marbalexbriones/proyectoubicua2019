@@ -18,7 +18,7 @@ class AniadirState extends State<Aniadir> {
   TextEditingController medicineEditingController = TextEditingController(); 
   TextEditingController quantityEditingController = TextEditingController(); 
   TextEditingController unitEditingController = TextEditingController(); 
-  TextEditingController regTimeEditingController = TextEditingController(); 
+  //TextEditingController regTimeEditingController = TextEditingController(); 
   TextEditingController frecuencyEditingController = TextEditingController(); 
   TextEditingController quanAvaEditingController = TextEditingController(); 
   TextEditingController indicationEditingController = TextEditingController(); 
@@ -86,7 +86,7 @@ class AniadirState extends State<Aniadir> {
                         ),
                       ],
                     ),
-                    Visibility(
+                    /*Visibility(
                       visible: false,
                       child: Container(
                         padding: EdgeInsets.only(bottom: 5.0),
@@ -100,7 +100,7 @@ class AniadirState extends State<Aniadir> {
                           ),
                         ),
                       ),
-                    ),
+                    ),*/
                     Container(
                       padding: EdgeInsets.only(bottom: 5.0),
                       child: TextFormField(
@@ -173,7 +173,7 @@ class AniadirState extends State<Aniadir> {
         medicine: medicineEditingController.text,
         quantity: quantityEditingController.text,
         unit: unitEditingController.text,
-        regTime: regTimeEditingController.text,
+        regTime: new DateTime.now().toString(),
         frequency: frecuencyEditingController.text,
         quantityAva: quanAvaEditingController.text,
         indication: indicationEditingController.text,
