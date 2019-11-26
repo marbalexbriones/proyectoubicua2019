@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proyectoubicua2019/colors.dart';
 import 'package:proyectoubicua2019/PruebasBaseDatos/pruebaDB.dart';
@@ -20,7 +21,7 @@ class Aniadir extends StatefulWidget {
 }
 
 class AniadirState extends State<Aniadir> {
-  TextEditingController idUserEditingController = TextEditingController(); // para capturar datos
+  /*TextEditingController idUserEditingController = TextEditingController(); // para capturar datos*/
   TextEditingController medicineEditingController = TextEditingController(); 
   TextEditingController quantityEditingController = TextEditingController(); 
   TextEditingController unitEditingController = TextEditingController(); 
@@ -31,13 +32,30 @@ class AniadirState extends State<Aniadir> {
 
   
   final _formKay = GlobalKey<FormState>();
-  
  
+ 
+  @override
+  void initState(){
+    super.initState();
+     medicineEditingController.text = "sdv";
+    if(widget.edit == true){
+      medicineEditingController.text = widget.reminder.medicine;
+      quantityEditingController.text = widget.reminder.quantity;
+       unitEditingController.text = widget.reminder.unit;
+      regTimeEditingController.text = widget.reminder.regTime;
+      frecuencyEditingController.text = widget.reminder.frequency;
+      quanAvaEditingController.text = widget.reminder.quantityAva;
+      indicationEditingController.text = widget.reminder.indication;
+     
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Añadir Pastilla"),
+          title: Text(widget.edit?"Editar Pastilla" :"Añadir Pastilla"),
            backgroundColor: col_primary,
           ),
         body: Form(
@@ -151,13 +169,13 @@ class AniadirState extends State<Aniadir> {
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    RaisedButton(
+                    /*RaisedButton(
                       child: Text("pastillas"),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Prueba()));
                       },
-                    ),
+                    ),*/
                   ],
                 )),
           ),
@@ -166,7 +184,7 @@ class AniadirState extends State<Aniadir> {
 
 
 
-  void _createReminder () async {
+  void _d () async {
     if(!_formKay.currentState.validate()){
       Scaffold.of(context).showSnackBar(
         SnackBar(content: Text("Procesing data"))
@@ -190,13 +208,43 @@ class AniadirState extends State<Aniadir> {
     }
   }
 
- 
+  void _createReminder () async {
+    if(!_formKay.currentState.validate()){
+      Scaffold.of(context).showSnackBar(
+        SnackBar(content: Text("Procesing data"))
+      );
+    }
+   else {
+      if(widget.edit == true){
+        
+        PastilleroDataBaseProvider.db.updateReminder(new Reminder(
+          idUser: widget.reminder.idUser,
+          medicine: medicineEditingController.text,
+          quantity: quantityEditingController.text,
+          unit: unitEditingController.text,
+          regTime: regTimeEditingController.text,
+          frequency: frecuencyEditingController.text,
+          quantityAva: quantityEditingController.text,
+          indication: indicationEditingController.text,
+          idReminder: widget.reminder.idReminder
+          ));
+        Navigator.pop(context);
+      }else{
+        await PastilleroDataBaseProvider.db.addReminderToDatabase(new Reminder(
+          idUser: 1,
+          medicine: medicineEditingController.text,
+          quantity: quantityEditingController.text,
+          unit: unitEditingController.text,
+          regTime: regTimeEditingController.text,
+          frequency: frecuencyEditingController.text,
+          quantityAva: quantityEditingController.text,
+          indication: indicationEditingController.text
+           ));
+      Navigator.pop(context);
 
+      }
 
-
-
-  
-
-
- 
+      
+    }
+  }
 }
