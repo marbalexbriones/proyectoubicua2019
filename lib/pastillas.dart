@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:proyectoubicua2019/aniadir.dart';
 import 'inicio.dart';
 import 'colors.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +33,16 @@ class Pastillas extends StatelessWidget {
                     onDismissed: (diretion) {
                       PastilleroDataBaseProvider.db
                           .deleteReminderWithId(item.idReminder);
+                         /* Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Aniadir(
+                          true,
+                          //Here is the record that we want to edit
+                          reminder: item,                          
+                        )                        
+                      )
+                      );*/
                     },
-                    child: customCard(
+                    child: customCard(item,
                         "assets/images/pastilla.png",
                         item.medicine,
                         item.quantity + " " + item.unit,
@@ -101,7 +110,7 @@ class Pastillas extends StatelessWidget {
 
 //CELDAS DE INICIO
 
-Widget customCard(String imagen, String nombre, String dosis, String time,
+Widget customCard(Reminder item, String imagen, String nombre, String dosis, String time,
         String restantes, BuildContext context) =>
     Padding(
       padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
@@ -142,9 +151,13 @@ Widget customCard(String imagen, String nombre, String dosis, String time,
                     height: 30.0,
                     elevation: 3,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Inicio()),
+                     Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Aniadir(
+                          true,
+                          //Here is the record that we want to edit
+                          reminder: item,                          
+                        )                        
+                      )
                       );
                     },
                     color: Colors.white,
@@ -158,5 +171,6 @@ Widget customCard(String imagen, String nombre, String dosis, String time,
             ],
           ),
         ),
+        
       ),
     );

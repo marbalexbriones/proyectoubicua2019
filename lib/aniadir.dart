@@ -7,6 +7,12 @@ import 'db/database.dart';
 import 'model/usuario_model.dart';
 
 class Aniadir extends StatefulWidget {
+  final bool edit;
+  final Reminder reminder;
+
+  Aniadir(this.edit, {this.reminder})
+  : assert(edit == true || reminder ==null);
+  
   @override
   State<StatefulWidget> createState() {
     return AniadirState();

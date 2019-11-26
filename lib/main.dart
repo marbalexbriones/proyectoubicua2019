@@ -98,7 +98,7 @@ class Main extends StatelessWidget {
             child: Text("Aniadir"),
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Aniadir()));
+                  context, MaterialPageRoute(builder: (context) => Aniadir(false)));
             },
           ),
           RaisedButton(

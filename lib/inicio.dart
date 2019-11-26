@@ -98,7 +98,7 @@ class Inicio extends StatelessWidget {
                   child: Icon(Icons.add),
                   onPressed: () {
                     Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Aniadir()));
+                context, MaterialPageRoute(builder: (context) => Aniadir(false)));
                   },
                   splashColor: col_primary,
                   backgroundColor: col_primary,
