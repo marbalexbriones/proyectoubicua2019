@@ -13,6 +13,10 @@ import 'package:proyectoubicua2019/AcercaDe.dart';
 import 'package:proyectoubicua2019/Ayuda.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:firebase_database/firebase_database.dart';
+
 void main() {
   runApp(new MaterialApp(
     theme: ThemeData(primarySwatch: Colors.cyan,),
