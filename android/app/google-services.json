@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "38367634720",
+    "firebase_url": "https://pastillapp-notifications.firebaseio.com",
+    "project_id": "pastillapp-notifications",
+    "storage_bucket": "pastillapp-notifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38367634720:android:3ad1540ebd1a52985da345",
+        "android_client_info": {
+          "package_name": "com.example.proyectoubicua2019"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "38367634720-p86j92magktmc7gd1s3l37c9danairc7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.proyectoubicua2019",
+            "certificate_hash": "e3f5f6ca45a489e841d52e3895e80ae4a26c4eb4"
+          }
+        },
+        {
+          "client_id": "38367634720-p1t9m4a77qnvjkcke529knqo58mkglg4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfQJPwj1kYCAUHjGQ6Lj42m136DdmOkj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38367634720-p1t9m4a77qnvjkcke529knqo58mkglg4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
