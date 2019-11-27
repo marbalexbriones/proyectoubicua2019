@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proyectoubicua2019/colors.dart';
+import 'package:proyectoubicua2019/pastillas.dart';
 import 'package:proyectoubicua2019/PruebasBaseDatos/pruebaDB.dart';
 
 import 'db/database.dart';
@@ -178,8 +179,9 @@ class AniadirState extends State<Aniadir> {
         quantityAva: quanAvaEditingController.text,
         indication: indicationEditingController.text,
       );
-
+      await sendPush(r);
       await PastilleroDataBaseProvider.db.addReminderToDatabase(r);
+      
       Navigator.pop(context);
     }
   }
