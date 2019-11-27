@@ -131,7 +131,7 @@ Widget customCard(String imagen, String nombre, String dosis, String time,
                         MaterialPageRoute(builder: (context) => Inicio()),
                       );
                     },
-                    color: col_primary,
+                    color: colPrimary,
                     child: Text(
                       'Tomar',
                       style: TextStyle(color: Colors.white),
@@ -150,7 +150,7 @@ Widget customCard(String imagen, String nombre, String dosis, String time,
                     color: Colors.white,
                     child: Text(
                       'Ver / Editar',
-                      style: TextStyle(color: col_primary),
+                      style: TextStyle(color: colPrimary),
                     ),
                   ),
                 ],

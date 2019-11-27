@@ -34,8 +34,8 @@ class Usuarios extends StatelessWidget {
         onPressed: () {
           // Add your onPressed code here!
         },
-        splashColor: col_primary,
-        backgroundColor: col_primary,
+        splashColor: colPrimary,
+        backgroundColor: colPrimary,
         elevation: 3,
       ),
     );
@@ -77,7 +77,7 @@ Widget userCard(String imagen, String nombre, BuildContext context) => Padding(
                 onPressed: () {
                   //AQUI VAMOS A CAMBIAR DE USUARIO
                 },
-                color: col_primary,
+                color: colPrimary,
                 child: Text(
                   'Seleccionar',
                   style: TextStyle(color: Colors.white),

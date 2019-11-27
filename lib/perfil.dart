@@ -22,6 +22,8 @@ class PerfilState extends State<Perfil> {
   Future<User> user;
   static const TextStyle optionStyle = TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
 
+  
+
   @override
   void initState() {
     super.initState();
@@ -35,6 +37,8 @@ class PerfilState extends State<Perfil> {
           child: FutureBuilder(
             future: user,
             builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+
               return Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,6 +166,10 @@ class PerfilState extends State<Perfil> {
                     ],
                   ),
                 ]);
+              }
+              else {
+                return Center(child: CircularProgressIndicator());
+              }
             },
           ),
         ),

@@ -42,7 +42,7 @@ class RegistroEsclavoState extends State<RegistroEsclavo> {
                   Center(
                     child: Text("Iniciar Sesión",
                       style: TextStyle(
-                        color: col_blue_gray,
+                        color: colBlueGray,
                         fontSize: 25,
                         fontFamily: 'GoogleSans'),
                     )),
@@ -99,7 +99,7 @@ class RegistroEsclavoState extends State<RegistroEsclavo> {
                   Text(
                     "Genero",
                     style: TextStyle(
-                    color: col_blue_gray,
+                    color: colBlueGray,
                     fontSize: 20,
                     fontFamily: 'GoogleSans'),
                   ),
@@ -144,7 +144,7 @@ class RegistroEsclavoState extends State<RegistroEsclavo> {
                   MaterialButton(
                     elevation: 5,
                     onPressed: _createUser,
-                    color: col_primary,
+                    color: colPrimary,
                     child: Text(
                       'Registrarse',
                       style: TextStyle(color: Colors.white),
@@ -157,7 +157,7 @@ class RegistroEsclavoState extends State<RegistroEsclavo> {
 
                       Fluttertoast.showToast(msg: prefs.getInt('idParent').toString(),toastLength: Toast.LENGTH_SHORT);
                     },
-                    color: col_primary,
+                    color: colPrimary,
                     child: Text(
                       'id',
                       style: TextStyle(color: Colors.white),
@@ -205,7 +205,7 @@ class RegistroEsclavoState extends State<RegistroEsclavo> {
         mobile: mobileEditingController.text,
         gender: _gender,
         age: ageEditingController.text,
-        parent_id: prefs.getInt('idParent')
+        parentId: prefs.getInt('idParent')
       );
       //si no existe, entonces
       // If () ... { }

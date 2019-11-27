@@ -32,7 +32,7 @@ class AniadirState extends State<Aniadir> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Añadir Pastilla"),
-           backgroundColor: col_primary,
+           backgroundColor: colPrimary,
           ),
         body: Form(
           key: _formKay,
@@ -139,7 +139,7 @@ class AniadirState extends State<Aniadir> {
                     MaterialButton(
                       elevation: 5,
                       onPressed: _createReminder,
-                      color: col_primary,
+                      color: colPrimary,
                       child: Text(
                         'Aniade',
                         style: TextStyle(color: Colors.white),

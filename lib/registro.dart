@@ -40,7 +40,7 @@ class RegistroState extends State<Registro> {
                   Center(
                     child: Text("Iniciar Sesión",
                       style: TextStyle(
-                        color: col_blue_gray,
+                        color: colBlueGray,
                         fontSize: 25,
                         fontFamily: 'GoogleSans'),
                     )),
@@ -97,7 +97,7 @@ class RegistroState extends State<Registro> {
                   Text(
                     "Genero",
                     style: TextStyle(
-                    color: col_blue_gray,
+                    color: colBlueGray,
                     fontSize: 20,
                     fontFamily: 'GoogleSans'),
                   ),
@@ -168,7 +168,7 @@ class RegistroState extends State<Registro> {
                   MaterialButton(
                     elevation: 5,
                     onPressed: _createUser,
-                    color: col_primary,
+                    color: colPrimary,
                     child: Text(
                       'Registrarse',
                       style: TextStyle(color: Colors.white),
@@ -214,7 +214,7 @@ class RegistroState extends State<Registro> {
         mobile: mobileEditingController.text,
         gender: _gender,
         age: ageEditingController.text,
-        parent_id: -1,
+        parentId: -1,
       );
       //si no existe, entonces
       // If () ... { }

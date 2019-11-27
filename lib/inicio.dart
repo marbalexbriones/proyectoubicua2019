@@ -61,7 +61,7 @@ class Inicio extends StatelessWidget {
             bottom: TabBar(
               indicatorColor: Colors.white,
               labelColor: Colors.white,
-              unselectedLabelColor: col_light_gray,
+              unselectedLabelColor: colLightGray,
               tabs: [
                 Column(
                   children: <Widget>[
@@ -84,7 +84,7 @@ class Inicio extends StatelessWidget {
               ],
             ),
             title: Text('Inicio'),
-            backgroundColor: col_primary,
+            backgroundColor: colPrimary,
           ),
           body: TabBarView(
             children: [
@@ -100,8 +100,8 @@ class Inicio extends StatelessWidget {
                     Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Aniadir()));
                   },
-                  splashColor: col_primary,
-                  backgroundColor: col_primary,
+                  splashColor: colPrimary,
+                  backgroundColor: colPrimary,
                   elevation: 3,
 
                 ),

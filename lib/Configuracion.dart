@@ -27,19 +27,19 @@ class Configuracion extends StatelessWidget {
           tiles: [
             ListTile(
               leading: Icon(Icons.settings),
-              trailing: Icon(Icons.check_box, color: col_primary),
+              trailing: Icon(Icons.check_box, color: colPrimary),
               title: Text('Formato 12 horas:'),
               subtitle: Text('Mostrar 11:59pm o 23:59.'),
             ),
             ListTile(
               leading: Icon(Icons.alarm_off),
-              trailing: Icon(Icons.check_box, color: col_primary),
+              trailing: Icon(Icons.check_box, color: colPrimary),
               title: Text('Horas de silencio:'),
               subtitle: Text('Silenciar alarmas entre 10:00pm y 6:00am.'),
             ),
             ListTile(
               leading: Icon(Icons.supervised_user_circle),
-              trailing: Icon(Icons.check_box, color: col_primary),
+              trailing: Icon(Icons.check_box, color: colPrimary),
               title: Text('Recordar usuario'),
               subtitle: Text('No cerrar sesión al cerrar la aplicación.'),
             ),
