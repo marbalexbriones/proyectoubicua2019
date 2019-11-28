@@ -107,7 +107,7 @@ class LoginState extends State<Login> {
                   ),
                 ),
               ),
-              Padding(
+              /*Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
                 child: MaterialButton(
                   minWidth: 100.0,
@@ -125,7 +125,7 @@ class LoginState extends State<Login> {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-              ),
+              ),*/
               Padding(
                 padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                 child: Row(

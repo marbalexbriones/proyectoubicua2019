@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
           if (userUR.hasData) {
             return SplashScreen(
               seconds: 2,
-              navigateAfterSeconds: userUR.data.idUser != 0 ? new Inicio() : new Login(),
+              navigateAfterSeconds: new Inicio(),
               title: new Text(
                 'Bienvenido!',
                 style: new TextStyle(
@@ -69,7 +69,23 @@ class _MyAppState extends State<MyApp> {
               loaderColor: col_primary,
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return SplashScreen(
+              seconds: 2,
+              navigateAfterSeconds: new Login(),
+              title: new Text(
+                'Bienvenido!',
+                style: new TextStyle(
+                    fontSize: 25.0,
+                    fontFamily: "GoogleSans",
+                    color: col_blue_gray),
+              ),
+              image: Image.asset("assets/images/logo_text.png"),
+              backgroundColor: col_light_gray,
+              styleTextUnderTheLoader: new TextStyle(),
+              photoSize: 100.0,
+              onClick: () => print("Flutter Egypt"),
+              loaderColor: col_primary,
+            );
           }
         });
   }

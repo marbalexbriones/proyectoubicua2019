@@ -28,7 +28,7 @@ class RegistroState extends State<Registro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Registro")),
+        appBar: AppBar(title: Text("Registro"), backgroundColor: col_primary,),
         body: Form(
           key: _formKay,
           child: SingleChildScrollView(
