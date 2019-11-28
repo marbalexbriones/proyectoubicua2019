@@ -43,7 +43,7 @@ class LoginState extends State<Login> {
                   child: Text(
                 "Iniciar Sesión",
                 style: TextStyle(
-                    color: colBlueGray,
+                    color: col_blue_gray,
                     fontSize: 25,
                     fontFamily: 'GoogleSans'),
               )),
@@ -144,7 +144,7 @@ class LoginState extends State<Login> {
                       },
                       child: Text(
                         'Registrate',
-                        style: TextStyle(fontSize: 15, color: colPrimary),
+                        style: TextStyle(fontSize: 15, color: col_primary),
                       ),
                     ),
                   ],

@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
               width:200,
               height: 100,
               decoration: BoxDecoration(
-                color: colPrimary,
+                color: col_primary,
 
               ),
               child: Image(image: AssetImage('Assets/Images/pastilla.jpg'),width: 200,height: 200,),
@@ -56,10 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
             RaisedButton(
               child:
               Text('Tomar',style: TextStyle(color: Colors.white),)
-              ,onPressed: (){},color: colPrimary,),
+              ,onPressed: (){},color: col_primary,),
             RaisedButton(
               child:
-              Text('Editar',style: TextStyle(color: colPrimary),)
+              Text('Editar',style: TextStyle(color: col_primary),)
               ,onPressed: (){},color: Colors.white,),
           ],
         ),
@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),backgroundColor: colPrimary,
+        child: Icon(Icons.add),backgroundColor: col_primary,
         onPressed: (){setState(() {
           items.add(creacontainer());
           print('hola');
