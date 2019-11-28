@@ -83,7 +83,7 @@ class LoginState extends State<Login> {
                       var user = await PastilleroDataBaseProvider.db.getUserWithEmail(emailController.text);
                       if (user != null) {
                         if (user.password.toString() == passwordController.text.toString()) {
-                          SharedPreferences prefs =await SharedPreferences.getInstance();
+                          SharedPreferences prefs = await SharedPreferences.getInstance();
                           setState(() {
                             prefs.setInt('idParent', user.idUser);
                           });

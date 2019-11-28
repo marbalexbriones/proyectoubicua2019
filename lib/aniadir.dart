@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proyectoubicua2019/colors.dart';
-import 'package:proyectoubicua2019/pastillas.dart';
-import 'package:proyectoubicua2019/PruebasBaseDatos/pruebaDB.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'db/database.dart';
 import 'model/usuario_model.dart';
@@ -19,6 +18,12 @@ class Aniadir extends StatefulWidget {
   State<StatefulWidget> createState() {
     return AniadirState();
   }
+}
+
+getUserId() async {
+  final prefs = await SharedPreferences.getInstance();
+  // Try reading data from the counter key. If it doesn't exist, return 0.
+  return prefs.getInt('idParent') ?? 0;
 }
 
 class AniadirState extends State<Aniadir> {
@@ -38,7 +43,7 @@ class AniadirState extends State<Aniadir> {
   @override
   void initState(){
     super.initState();
-     medicineEditingController.text = "sdv";
+    //medicineEditingController.text = "";
     if(widget.edit == true){
       medicineEditingController.text = widget.reminder.medicine;
       quantityEditingController.text = widget.reminder.quantity;
@@ -47,8 +52,6 @@ class AniadirState extends State<Aniadir> {
       frecuencyEditingController.text = widget.reminder.frequency;
       quanAvaEditingController.text = widget.reminder.quantityAva;
       indicationEditingController.text = widget.reminder.indication;
-     
-
     }
   }
 
@@ -165,8 +168,8 @@ class AniadirState extends State<Aniadir> {
                       elevation: 5,
                       onPressed: _createReminder,
                       color: col_primary,
-                      child: Text(
-                        'Añadir',
+                      child: Text( widget.edit ?
+                        'Guardar' : "Añadir",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -183,33 +186,6 @@ class AniadirState extends State<Aniadir> {
         ));
   }
 
-
-
-  void _d () async {
-    if(!_formKay.currentState.validate()){
-      Scaffold.of(context).showSnackBar(
-        SnackBar(content: Text("Procesing data"))
-      );
-    }
-    else {
-      // Si no existe
-      Reminder r = new Reminder(
-        idUser: 1,
-        medicine: medicineEditingController.text,
-        quantity: quantityEditingController.text,
-        unit: unitEditingController.text,
-        regTime: new DateTime.now().toString(),
-        frequency: frecuencyEditingController.text,
-        quantityAva: quanAvaEditingController.text,
-        indication: indicationEditingController.text,
-      );
-      await sendPush(r);
-      await PastilleroDataBaseProvider.db.addReminderToDatabase(r);
-      
-      Navigator.pop(context);
-    }
-  }
-
   void _createReminder () async {
     if(!_formKay.currentState.validate()){
       Scaffold.of(context).showSnackBar(
@@ -224,7 +200,7 @@ class AniadirState extends State<Aniadir> {
           medicine: medicineEditingController.text,
           quantity: quantityEditingController.text,
           unit: unitEditingController.text,
-          regTime: new DateTime.now().toString(),
+          regTime: widget.reminder.regTime,
           frequency: frecuencyEditingController.text,
           quantityAva: quanAvaEditingController.text,
           indication: indicationEditingController.text,
@@ -233,7 +209,7 @@ class AniadirState extends State<Aniadir> {
         Navigator.pop(context);
       }else{
         await PastilleroDataBaseProvider.db.addReminderToDatabase(new Reminder(
-          idUser: 1,
+          idUser: await getUserId(),
           medicine: medicineEditingController.text,
           quantity: quantityEditingController.text,
           unit: unitEditingController.text,

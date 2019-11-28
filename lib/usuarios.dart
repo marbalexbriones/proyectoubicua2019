@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:proyectoubicua2019/agregarSubcuenta.dart';
+import 'package:proyectoubicua2019/inicio.dart';
+import 'package:proyectoubicua2019/model/usuario_model.dart';
 import 'colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:proyectoubicua2019/registroEsclavo.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:proyectoubicua2019/db/database.dart';
 
 final users = [
   {
@@ -11,8 +15,26 @@ final users = [
   },
 ];
 
+Future<List<User>> getUserList() async {
+  final prefs = await SharedPreferences.getInstance();
+  // Try reading data from the counter key. If it doesn't exist, return 0.
+  int id = prefs.getInt('idParent') ?? 0;
+  print("Yo soy " + id.toString());
+  User me = await PastilleroDataBaseProvider.db.getUserWithId(id);
+  int idParent = me.parent_id;
+  print("El padre mio es " + idParent.toString());
+  return await PastilleroDataBaseProvider.db.getUserWithParentId(idParent);
+}
+
+getUserId() async {
+  final prefs = await SharedPreferences.getInstance();
+  // Try reading data from the counter key. If it doesn't exist, return 0.
+  return prefs.getInt('idParent') ?? 0;
+}
+
 class Usuarios extends StatelessWidget {
-  final dataSource = users;
+  //var dataSource = users;
+  Future<List<User>> users = getUserList();
   //Usuarios({Key key, @required this.dataSource}) : super(key: key);
 
   @override
@@ -22,18 +44,40 @@ class Usuarios extends StatelessWidget {
         title: new Text("Usuarios"),
         backgroundColor: Colors.cyan,
       ),
-      body: GridView.count(
+      body: FutureBuilder(
+          future: users,
+          builder: (context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return GridView.count(
+                  childAspectRatio: (1 / 0.17),
+                  crossAxisCount: 1,
+                  children: List.generate(snapshot.data.length, (index) {
+                    return userCard(
+                        'assets/images/user.png',
+                        snapshot.data[index].name +
+                            " " +
+                            snapshot.data[index].lname,
+                        context,
+                        snapshot.data[index].idUser);
+                  }));
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          }),
+
+      /*GridView.count(
         childAspectRatio: (1 / 0.17),
         crossAxisCount: 1,
         children: List.generate(dataSource.length, (index) {
           return userCard(dataSource[index]['imagen'],
               dataSource[index]['nombre'], context);
         }),
-      ),
+      ),*/
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => RegistroEsclavo()),);
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AniadirSubCuenta()));
         },
         splashColor: col_primary,
         backgroundColor: col_primary,
@@ -45,7 +89,8 @@ class Usuarios extends StatelessWidget {
 
 //CELDAS DE INICIO
 
-Widget userCard(String imagen, String nombre, BuildContext context) => Padding(
+Widget userCard(String imagen, String nombre, BuildContext context, int id) =>
+    Padding(
       padding: EdgeInsets.all(5.0),
       child: Card(
           child: Row(
@@ -58,7 +103,7 @@ Widget userCard(String imagen, String nombre, BuildContext context) => Padding(
             ),
           ),
           Expanded(
-            flex: 5, // 60%
+            flex: 4, // 60%
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
@@ -68,15 +113,21 @@ Widget userCard(String imagen, String nombre, BuildContext context) => Padding(
             ),
           ),
           Expanded(
-            flex: 3, // 20%
+            flex: 4, // 20%
             child: Padding(
               padding: EdgeInsets.fromLTRB(5.0, 0.0, 5.0, 0.0),
               child: MaterialButton(
                 minWidth: 30.0,
                 height: 30.0,
                 elevation: 3,
-                onPressed: () {
-                  //AQUI VAMOS A CAMBIAR DE USUARIO
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  prefs.setInt('idParent', id);
+                  //Navigator.of(context).popUntil(ModalRoute.withName('/Login'));
+                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Inicio()));
                 },
                 color: col_primary,
                 child: Text(

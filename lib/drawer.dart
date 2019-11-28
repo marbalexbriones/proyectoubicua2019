@@ -9,13 +9,17 @@ import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomDrawer extends Drawer {
+  final name;
+
+  CustomDrawer(this.name);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          _createHeader(),
+          _createHeader(name),
           _createDrawerItem(
               icon: Icons.add_alarm,
               text: 'Añadir Alarma',
@@ -58,7 +62,7 @@ class CustomDrawer extends Drawer {
   }
 }
 
-Widget _createHeader() {
+Widget _createHeader(name) {
   return DrawerHeader(
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
@@ -70,7 +74,7 @@ Widget _createHeader() {
         Positioned(
             bottom: 12.0,
             left: 16.0,
-            child: Text("Nombre de Usuario",
+            child: Text(name,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 20.0,

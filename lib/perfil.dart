@@ -87,7 +87,7 @@ class PerfilState extends State<Perfil> {
                                           EdgeInsets.only(left: 20, bottom: 25),
                                     ),
                                     Text(
-                                      snapshot.data.name,
+                                      snapshot.data.name + " " + snapshot.data.lname,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 30,

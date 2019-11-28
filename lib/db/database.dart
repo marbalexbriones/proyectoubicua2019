@@ -71,12 +71,34 @@ class PastilleroDataBaseProvider {
     return list;
   }
 
+  // Muestra todos los recordatorios de un id
+  Future<List<Reminder>> getAllRemindersFromId(id) async {
+    final db = await database;
+    var response = await db.query("Reminder");
+    List<Reminder> list = response.map((c) => Reminder.fromMap(c)).toList();
+    list.removeWhere((r) => r.idUser != id);
+    
+    return list;
+  }
+
   //Query
   //muestra un solo usuario por el id la base de datos
   Future<User> getUserWithId(int id) async {
     final db = await database;
     var response = await db.query("User", where: "idUser = ?", whereArgs: [id]);
     return response.isNotEmpty ? User.fromMap(response.first) : null;
+  }
+
+  Future<List<User>> getUserWithParentId(int id) async {
+    final db = await database;
+    List<User> users = List<User>();
+    var response =
+        await db.query("User", where: "parent_id = ?", whereArgs: [id]);
+    for (int i = 0; i < response.length; i++) {
+      users.add(User.fromMap(response[i]));
+    }
+
+    return users.isNotEmpty ? users : null;
   }
 
   Future<User> getUserWithEmail(String email) async {

@@ -11,9 +11,17 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+
+Future<User> getUser() async {
+  final prefs = await SharedPreferences.getInstance();
+  // Try reading data from the counter key. If it doesn't exist, return 0.
+  int id = prefs.getInt('idParent') ?? 0;
+  return await PastilleroDataBaseProvider.db.getUserWithId(id);
+}
 
 class Pastillas extends StatefulWidget {
   @override
@@ -25,14 +33,16 @@ class _MyPastillaState extends State<Pastillas> {
   var title = '';
   var body = {};
   var mytoken = '';
+  Future<User> user;
 
   FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       new FlutterLocalNotificationsPlugin();
-
   @override
   void initState() {
     super.initState();
+    user = getUser();
+
     var android = new AndroidInitializationSettings('mipmap/ic_launcher');
     var ios = IOSInitializationSettings();
     var platform = new InitializationSettings(android, ios);
@@ -89,84 +99,50 @@ class _MyPastillaState extends State<Pastillas> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-      child: FutureBuilder<List<Reminder>>(
-        future: PastilleroDataBaseProvider.db.getAllReminders(),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<Reminder>> snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              physics: BouncingScrollPhysics(),
-              itemCount: snapshot.data.length,
-              itemBuilder: (BuildContext context, int index) {
-                Reminder item = snapshot.data[index];
+        padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+        child: (FutureBuilder<User>(
+            future: user,
+            builder: (BuildContext context, AsyncSnapshot<User> userUR) {
+              if (userUR.hasData) {
+                return FutureBuilder(
+                    future: PastilleroDataBaseProvider.db
+                        .getAllRemindersFromId(userUR.data.idUser),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<Reminder>> snapshot) {
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            Reminder item = snapshot.data[index];
 
-                //delete one register for id
-                return Dismissible(
-                    key: UniqueKey(),
-                    background: Container(color: col_blue_gray),
-                    onDismissed: (diretion) {
-                      PastilleroDataBaseProvider.db
-                          .deleteReminderWithId(item.idReminder);
-                         /* Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Aniadir(
-                          true,
-                          //Here is the record that we want to edit
-                          reminder: item,                          
-                        )                        
-                      )
-                      );*/
-                    },
-                    child: customCard("assets/images/pastilla.png",
-                        item.medicine,
-                        item.quantity + " " + item.unit,
-                        "cada " + item.frequency + " horas",
-                        item.quantityAva,
-                        item.idReminder,
-                        context,
-                        item)
-
-                    /*ListTile(
-                    title: Text("Medicamento:" +
-                        item.medicine +
-                        "       Usuario:" +
-                        item.idUser.toString()),
-                    subtitle: Text("Catntidad:" +
-                        item.quantity +
-                        "       Disponible:" +
-                        item.quantityAva +
-                        "         Frecuencia:" +
-                        item.frequency),
-                    leading: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minWidth: 44,
-                        minHeight: 44,
-                        maxWidth: 64,
-                        maxHeight: 64,
-                      ),
-                      child: Image.network(
-                        'https://picsum.photos/250?image=9',
-                      ),
-                    ),
-                    //If we press one of the cards, it takes us to the page to edit, with the data onTap:
-                    //This method is in the file add_editclient.dart
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => AddEditUser(
-                                true,
-                                //Here is the record that we want to edit
-                              )));
-                    },
-                  ),*/
-                    );
-              },
-            );
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
-    );
+                            //delete one register for id
+                            return Dismissible(
+                                key: UniqueKey(),
+                                background: Container(color: col_blue_gray),
+                                onDismissed: (diretion) {
+                                  PastilleroDataBaseProvider.db
+                                      .deleteReminderWithId(item.idReminder);
+                                },
+                                child: customCard(
+                                    "assets/images/pastilla.png",
+                                    item.medicine,
+                                    item.quantity + " " + item.unit,
+                                    "cada " + item.frequency + " horas",
+                                    item.quantityAva,
+                                    item.idReminder,
+                                    context,
+                                    item));
+                          },
+                        );
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    });
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            })));
 
     /*return GridView.count(
       childAspectRatio: (1 / 0.59),
@@ -266,14 +242,12 @@ Widget customCard(
                     height: 30.0,
                     elevation: 3,
                     onPressed: () {
-                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Aniadir(
-                          true,
-                          //Here is the record that we want to edit
-                          reminder: reminder,                          
-                        )                        
-                      )
-                      );
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => Aniadir(
+                                true,
+                                //Here is the record that we want to edit
+                                reminder: reminder,
+                              )));
                     },
                     color: Colors.white,
                     child: Text(
@@ -286,7 +260,6 @@ Widget customCard(
             ],
           ),
         ),
-        
       ),
     );
 
@@ -364,9 +337,8 @@ sendPush(Reminder reminder) async {
     'Content-Type': 'application/json'
   };
 
-
   Future.delayed(const Duration(milliseconds: 30000), () async {
-      var response = await http.post(url, body: body, headers: headers);
+    var response = await http.post(url, body: body, headers: headers);
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
       var itemCount = jsonResponse['totalItems'];
@@ -376,5 +348,4 @@ sendPush(Reminder reminder) async {
     }
   });
   // Await the http get response, then decode the json-formatted responce.
-  
 }
