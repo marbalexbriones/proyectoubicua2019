@@ -65,7 +65,7 @@ Widget doctorCard(String imagen, String nombre, String lugar, String telefono,
                   
                   _launchCaller(telefono);
                 },
-                color: col_primary,
+                color: colPrimary,
                 child: Text(
                   'Llamar',
                   style: TextStyle(color: Colors.white),

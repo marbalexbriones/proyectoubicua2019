@@ -231,7 +231,7 @@ Widget customCard(
                             toastLength: Toast.LENGTH_SHORT);
                       }
                     },
-                    color: col_primary,
+                    color: colPrimary,
                     child: Text(
                       'Tomar',
                       style: TextStyle(color: Colors.white),
@@ -252,7 +252,7 @@ Widget customCard(
                     color: Colors.white,
                     child: Text(
                       'Ver / Editar',
-                      style: TextStyle(color: col_primary),
+                      style: TextStyle(color: colPrimary),
                     ),
                   ),
                 ],

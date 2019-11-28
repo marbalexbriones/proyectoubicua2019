@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'colors.dart';
 
-void main() => runApp(new pastillaap());
+void main() => runApp(new PastillApp());
 
-class pastillaap extends StatelessWidget {
+class PastillApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
               width:200,
               height: 100,
               decoration: BoxDecoration(
-                color: col_primary,
+                color: colPrimary,
 
               ),
               child: Image(image: AssetImage('Assets/Images/pastilla.jpg'),width: 200,height: 200,),
@@ -56,10 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
             RaisedButton(
               child:
               Text('Tomar',style: TextStyle(color: Colors.white),)
-              ,onPressed: (){},color: col_primary,),
+              ,onPressed: (){},color: colPrimary,),
             RaisedButton(
               child:
-              Text('Editar',style: TextStyle(color: col_primary),)
+              Text('Editar',style: TextStyle(color: colPrimary),)
               ,onPressed: (){},color: Colors.white,),
           ],
         ),
@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),backgroundColor: col_primary,
+        child: Icon(Icons.add),backgroundColor: colPrimary,
         onPressed: (){setState(() {
           items.add(creacontainer());
           print('hola');

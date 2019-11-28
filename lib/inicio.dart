@@ -96,7 +96,7 @@ class InicioState extends State<Inicio>  {
             bottom: TabBar(
               indicatorColor: Colors.white,
               labelColor: Colors.white,
-              unselectedLabelColor: col_light_gray,
+              unselectedLabelColor: colLightGray,
               tabs: [
                 Column(
                   children: <Widget>[
@@ -119,7 +119,7 @@ class InicioState extends State<Inicio>  {
               ],
             ),
             title: Text('Inicio'),
-            backgroundColor: col_primary,
+            backgroundColor: colPrimary,
           ),
           body: TabBarView(
             children: [
@@ -137,8 +137,8 @@ class InicioState extends State<Inicio>  {
                         MaterialPageRoute(
                             builder: (context) => Aniadir(false)));
                   },
-                  splashColor: col_primary,
-                  backgroundColor: col_primary,
+                  splashColor: colPrimary,
+                  backgroundColor: colPrimary,
                   elevation: 3,
                 ),
               ),

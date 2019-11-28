@@ -43,7 +43,7 @@ class LoginState extends State<Login> {
                   child: Text(
                 "Iniciar Sesión",
                 style: TextStyle(
-                    color: col_blue_gray,
+                    color: colBlueGray,
                     fontSize: 25,
                     fontFamily: 'GoogleSans'),
               )),
@@ -87,8 +87,8 @@ class LoginState extends State<Login> {
                           setState(() {
                             prefs.setInt('idParent', user.idUser);
                           });
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()),
-                          );
+                          
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Inicio()),);
                         }
                         else {
                           Fluttertoast.showToast(msg: 'Incorrecto !', toastLength: Toast.LENGTH_SHORT);
@@ -100,10 +100,8 @@ class LoginState extends State<Login> {
                     }
                     return null;
                   },
-                  color: col_primary,
-                  child: Text(
-                    'Acceder',
-                    style: TextStyle(color: Colors.white),
+                  color: colPrimary,
+                  child: Text('Acceder', style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
@@ -119,7 +117,7 @@ class LoginState extends State<Login> {
                       MaterialPageRoute(builder: (context) => Inicio()),
                     );
                   },
-                  color: col_primary,
+                  color: colPrimary,
                   child: Text(
                     'Accede Sin loginr',
                     style: TextStyle(color: Colors.white),
@@ -146,7 +144,7 @@ class LoginState extends State<Login> {
                       },
                       child: Text(
                         'Registrate',
-                        style: TextStyle(fontSize: 15, color: col_primary),
+                        style: TextStyle(fontSize: 15, color: colPrimary),
                       ),
                     ),
                   ],
