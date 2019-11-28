@@ -12,17 +12,22 @@ import 'package:proyectoubicua2019/editar.dart';
 import 'package:proyectoubicua2019/AcercaDe.dart';
 import 'package:proyectoubicua2019/Ayuda.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:proyectoubicua2019/model/usuario_model.dart';
+import 'package:proyectoubicua2019/db/database.dart';
 
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:firebase_database/firebase_database.dart';
+Future<User> getUser() async {
+  final prefs = await SharedPreferences.getInstance();
+  // Try reading data from the counter key. If it doesn't exist, return 0.
+  int id = prefs.getInt('idParent') ?? 0;
+  return await PastilleroDataBaseProvider.db.getUserWithId(id);
+}
 
 void main() {
   runApp(new MaterialApp(
-    theme: ThemeData(primarySwatch: Colors.cyan,),
+    theme: ThemeData(
+      primarySwatch: Colors.cyan,
+    ),
     home: new MyApp(),
-    
-
   ));
 }
 
@@ -32,26 +37,41 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
+  Future<User> user;
 
+  @override
+  void initState() {
+    super.initState();
+    user = getUser();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return new SplashScreen(
-      seconds: 2,
-      navigateAfterSeconds: new Login(),
-      title: new Text(
-        'Bienvenido!',
-        style: new TextStyle(fontSize: 25.0, fontFamily: "GoogleSans",color: col_blue_gray),
-      ),
-      
-      image: Image.asset(
-                "assets/images/logo_text.png"
+    return new FutureBuilder(
+        future: user,
+        builder: (BuildContext context, AsyncSnapshot<User> userUR) {
+          if (userUR.hasData) {
+            return SplashScreen(
+              seconds: 2,
+              navigateAfterSeconds: userUR.data.idUser != 0 ? new Inicio() : new Login(),
+              title: new Text(
+                'Bienvenido!',
+                style: new TextStyle(
+                    fontSize: 25.0,
+                    fontFamily: "GoogleSans",
+                    color: col_blue_gray),
               ),
-      backgroundColor: col_light_gray,
-      styleTextUnderTheLoader: new TextStyle(),
-      photoSize: 100.0,
-      onClick: () => print("Flutter Egypt"),
-      loaderColor: col_primary,
-    );
+              image: Image.asset("assets/images/logo_text.png"),
+              backgroundColor: col_light_gray,
+              styleTextUnderTheLoader: new TextStyle(),
+              photoSize: 100.0,
+              onClick: () => print("Flutter Egypt"),
+              loaderColor: col_primary,
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        });
   }
 }
 
@@ -104,8 +124,8 @@ class Main extends StatelessWidget {
           RaisedButton(
             child: Text("Aniadir"),
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Aniadir(false)));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Aniadir(false)));
             },
           ),
           RaisedButton(
@@ -134,9 +154,6 @@ class Main extends StatelessWidget {
     );
   }
 }
-
-
-
 
 /*import 'package:flutter/material.dart';
 
