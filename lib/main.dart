@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return new SplashScreen(
       seconds: 2,
-      navigateAfterSeconds: whatLogin(),
+      navigateAfterSeconds: new Login(),
       title: new Text(
         'Bienvenido!',
         style: new TextStyle(fontSize: 25.0, fontFamily: "GoogleSans",color: colBlueGray),
@@ -38,14 +38,14 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  whatLogin() async {
-    final prefs = await SharedPreferences.getInstance();
-    final counter = prefs.getInt('counter') ?? -1;
-    if (counter >= 0) {
-      return new Inicio();
-    }
-    else {
-      return new Login();
-    }
-  }
+  // whatLogin() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final counter = prefs.getInt('counter') ?? -1;
+  //   if (counter >= 0) {
+  //     return new Inicio();
+  //   }
+  //   else {
+  //     return new Login();
+  //   }
+  // }
 }

@@ -4,11 +4,25 @@ import 'package:proyectoubicua2019/db/database.dart';
 import 'package:proyectoubicua2019/model/usuario_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+TextEditingController nameController = TextEditingController();
+TextEditingController lnameController = TextEditingController();
+TextEditingController emailController = TextEditingController();
+TextEditingController phoneController = TextEditingController();
+TextEditingController genderController = TextEditingController();
+TextEditingController ageController = TextEditingController();
+
 Future<User> getUser() async {
   final prefs = await SharedPreferences.getInstance();
   // Try reading data from the counter key. If it doesn't exist, return 0.
   int id = prefs.getInt('idParent') ?? 0;
-  return await PastilleroDataBaseProvider.db.getUserWithId(id);
+  var a = await PastilleroDataBaseProvider.db.getUserWithId(id);
+  nameController.text = a.name;
+  lnameController.text = a.lname;
+  emailController.text = a.email;
+  phoneController.text = a.mobile;
+  genderController.text = a.gender;
+  ageController.text = a.age;
+  return a;
 }
 
 class Perfil extends StatefulWidget {
@@ -22,7 +36,7 @@ class PerfilState extends State<Perfil> {
   Future<User> user;
   static const TextStyle optionStyle = TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
 
-  
+
 
   @override
   void initState() {
@@ -92,7 +106,9 @@ class PerfilState extends State<Perfil> {
                       Padding(padding: EdgeInsets.only(left: 200),),
                       Container(width: 100,),
                       FloatingActionButton(
-                        onPressed: () {},
+                        onPressed: () {
+
+                        },
                         child: Icon(Icons.save),
                         backgroundColor: Colors.yellow,
                       ),
@@ -105,7 +121,8 @@ class PerfilState extends State<Perfil> {
                       Container(
                         padding: EdgeInsets.only(left: 12),
                         child: TextFormField(
-                          initialValue: snapshot.data.name,
+                          // initialValue: snapshot.data.name,
+                          controller: nameController,
                           decoration: InputDecoration(
                             labelText: "Nombre",
                             hintText: "Ej. Juan",
@@ -115,7 +132,8 @@ class PerfilState extends State<Perfil> {
                       Container(
                         padding: EdgeInsets.only(left: 12),
                         child: TextFormField(
-                          initialValue: snapshot.data.lname,
+                          // initialValue: snapshot.data.lname,
+                          controller: lnameController,
                           decoration: InputDecoration(
                             labelText: "Apellido",
                             hintText: "Ej. Peres",
@@ -125,7 +143,8 @@ class PerfilState extends State<Perfil> {
                       Container(
                         padding: EdgeInsets.only(left: 12),
                         child: TextFormField(
-                          initialValue: snapshot.data.email,
+                          // initialValue: snapshot.data.email,
+                          controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             labelText: "Correo",
@@ -136,7 +155,8 @@ class PerfilState extends State<Perfil> {
                       Container(
                         padding: EdgeInsets.only(left: 12),
                         child: TextFormField(
-                          initialValue: snapshot.data.mobile,
+                          // initialValue: snapshot.data.mobile,
+                          controller: phoneController,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             labelText: "Numero telefonico",
@@ -146,7 +166,8 @@ class PerfilState extends State<Perfil> {
                       Container(
                         padding: EdgeInsets.only(left: 12),
                         child: TextFormField(
-                          initialValue: snapshot.data.gender,
+                          // initialValue: snapshot.data.gender,
+                          controller: genderController,
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             labelText: "Sexo",
@@ -156,7 +177,8 @@ class PerfilState extends State<Perfil> {
                       Container(
                         padding: EdgeInsets.only(left: 12),
                         child: TextFormField(
-                          initialValue: snapshot.data.age,
+                          // initialValue: snapshot.data.age,
+                          controller: ageController,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             labelText: "Edad",

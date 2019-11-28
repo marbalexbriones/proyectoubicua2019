@@ -104,6 +104,7 @@ class LoginState extends State<Login> {
                   ),
                 ),
               ),
+              
               Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
                 child: MaterialButton(
