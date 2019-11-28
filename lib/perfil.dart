@@ -4,27 +4,6 @@ import 'package:proyectoubicua2019/db/database.dart';
 import 'package:proyectoubicua2019/model/usuario_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-TextEditingController nameController = TextEditingController();
-TextEditingController lnameController = TextEditingController();
-TextEditingController emailController = TextEditingController();
-TextEditingController phoneController = TextEditingController();
-TextEditingController genderController = TextEditingController();
-TextEditingController ageController = TextEditingController();
-
-Future<User> getUser() async {
-  final prefs = await SharedPreferences.getInstance();
-  // Try reading data from the counter key. If it doesn't exist, return 0.
-  int id = prefs.getInt('idParent') ?? 0;
-  var a = await PastilleroDataBaseProvider.db.getUserWithId(id);
-  nameController.text = a.name;
-  lnameController.text = a.lname;
-  emailController.text = a.email;
-  phoneController.text = a.mobile;
-  genderController.text = a.gender;
-  ageController.text = a.age;
-  return a;
-}
-
 class Perfil extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -36,7 +15,32 @@ class PerfilState extends State<Perfil> {
   Future<User> user;
   static const TextStyle optionStyle = TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
 
+  TextEditingController nameController = TextEditingController();
+  TextEditingController lnameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
+  String password;
+  int userId;
+  int parentID;
 
+Future<User> getUser() async {
+  final prefs = await SharedPreferences.getInstance();
+  // Try reading data from the counter key. If it doesn't exist, return 0.
+  int id = prefs.getInt('idParent') ?? 0;
+  var a = await PastilleroDataBaseProvider.db.getUserWithId(id);
+  password = a.password;
+  userId = a.idUser;
+  parentID = a.parent_id;
+  nameController.text = a.name;
+  lnameController.text = a.lname;
+  emailController.text = a.email;
+  phoneController.text = a.mobile;
+  genderController.text = a.gender;
+  ageController.text = a.age;
+  return a;
+}
 
   @override
   void initState() {
@@ -106,9 +110,7 @@ class PerfilState extends State<Perfil> {
                       Padding(padding: EdgeInsets.only(left: 200),),
                       Container(width: 100,),
                       FloatingActionButton(
-                        onPressed: () {
-
-                        },
+                        onPressed: _saveUser,
                         child: Icon(Icons.save),
                         backgroundColor: Colors.yellow,
                       ),
@@ -197,5 +199,21 @@ class PerfilState extends State<Perfil> {
         ),
       ),
     );
+  }
+
+  void _saveUser() async {
+
+    PastilleroDataBaseProvider.db.updateUser(new User(
+        idUser: userId,
+        name: nameController.text,
+        lname: lnameController.text,
+        email: emailController.text,
+        password: password,
+        mobile: phoneController.text,
+        gender: genderController.text,
+        age: ageController.text,
+        parent_id: parentID,
+    ));
+        Navigator.pop(context);
   }
 }

@@ -214,7 +214,7 @@ class RegistroState extends State<Registro> {
         mobile: mobileEditingController.text,
         gender: _gender,
         age: ageEditingController.text,
-        parentId: -1,
+        parent_id: -1,
       );
       //si no existe, entonces
       // If () ... { }

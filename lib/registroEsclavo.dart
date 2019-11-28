@@ -205,7 +205,7 @@ class RegistroEsclavoState extends State<RegistroEsclavo> {
         mobile: mobileEditingController.text,
         gender: _gender,
         age: ageEditingController.text,
-        parentId: prefs.getInt('idParent')
+        parent_id: prefs.getInt('idParent')
       );
       //si no existe, entonces
       // If () ... { }

@@ -7,9 +7,9 @@ class User{
   String mobile;
   String gender;
   String age;
-  int parentId;
+  int parent_id;
 
-  User ({this.idUser, this.name, this.lname, this.email, this.password, this.mobile, this.gender,this.age, this.parentId});
+  User ({this.idUser, this.name, this.lname, this.email, this.password, this.mobile, this.gender,this.age, this.parent_id});
 
   //To insert the data in the bd, we need to convert it into a Map
   //Para insertar los datos en la bd, necesitamos convertirlo en un Map
@@ -22,7 +22,7 @@ class User{
         "mobile":mobile,
         "gender":gender,
         "age":age,
-        "parentId": parentId,
+        "parent_id": parent_id,
   };
 
   //to receive the data we need to pass it from Map to jsons
@@ -36,7 +36,7 @@ class User{
         mobile: json ["mobile"],
         gender: json ["gender"],
         age: json ["age"],
-        parentId: json["parentId"],
+        parent_id: json["parent_id"],
     );
 }
 
