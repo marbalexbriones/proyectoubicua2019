@@ -14,7 +14,6 @@ import 'package:firebase_database/firebase_database.dart';
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'dart:io';
 
 class Pastillas extends StatefulWidget {
   @override
@@ -118,8 +117,7 @@ class _MyPastillaState extends State<Pastillas> {
                       )
                       );*/
                     },
-                    child: customCard(item,
-                        "assets/images/pastilla.png",
+                    child: customCard("assets/images/pastilla.png",
                         item.medicine,
                         item.quantity + " " + item.unit,
                         "cada " + item.frequency + " horas",
@@ -272,7 +270,7 @@ Widget customCard(
                         builder: (context) => Aniadir(
                           true,
                           //Here is the record that we want to edit
-                          reminder: item,                          
+                          reminder: reminder,                          
                         )                        
                       )
                       );
