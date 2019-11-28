@@ -4,7 +4,6 @@ import 'package:splashscreen/splashscreen.dart';
 import 'package:proyectoubicua2019/colors.dart';
 import 'package:proyectoubicua2019/inicio.dart';
 import 'package:proyectoubicua2019/login.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:proyectoubicua2019/model/usuario_model.dart';
 import 'package:proyectoubicua2019/db/database.dart';
 

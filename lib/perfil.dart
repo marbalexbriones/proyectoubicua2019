@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:proyectoubicua2019/db/database.dart';
 import 'package:proyectoubicua2019/model/usuario_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -214,6 +215,7 @@ Future<User> getUser() async {
         age: ageController.text,
         parent_id: parentID,
     ));
-        Navigator.pop(context);
+    Fluttertoast.showToast(msg: 'Incorrecto !', toastLength: Toast.LENGTH_SHORT);
+
   }
 }

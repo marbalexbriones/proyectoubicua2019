@@ -100,7 +100,7 @@ class LoginState extends State<Login> {
                     }
                     return null;
                   },
-                  color: colPrimary,
+                  color: col_primary,
                   child: Text('Acceder', style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -117,7 +117,7 @@ class LoginState extends State<Login> {
                       MaterialPageRoute(builder: (context) => Inicio()),
                     );
                   },
-                  color: colPrimary,
+                  color: col_primary,
                   child: Text(
                     'Accede Sin loginr',
                     style: TextStyle(color: Colors.white),

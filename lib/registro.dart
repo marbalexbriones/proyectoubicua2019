@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:proyectoubicua2019/colors.dart';
-import 'package:proyectoubicua2019/model/usuario_model.dart' as prefix0;
 
 import 'db/database.dart';
 import 'model/usuario_model.dart';
@@ -41,7 +40,7 @@ class RegistroState extends State<Registro> {
                   Center(
                     child: Text("Iniciar Sesión",
                       style: TextStyle(
-                        color: colBlueGray,
+                        color: col_blue_gray,
                         fontSize: 25,
                         fontFamily: 'GoogleSans'),
                     )),
@@ -98,7 +97,7 @@ class RegistroState extends State<Registro> {
                   Text(
                     "Genero",
                     style: TextStyle(
-                    color: colBlueGray,
+                    color: col_blue_gray,
                     fontSize: 20,
                     fontFamily: 'GoogleSans'),
                   ),
@@ -169,7 +168,7 @@ class RegistroState extends State<Registro> {
                   MaterialButton(
                     elevation: 5,
                     onPressed: _createUser,
-                    color: colPrimary,
+                    color: col_primary,
                     child: Text(
                       'Registrarse',
                       style: TextStyle(color: Colors.white),

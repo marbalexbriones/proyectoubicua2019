@@ -33,11 +33,11 @@ class Recuperar extends StatelessWidget {
             Text("Recuperar Contraseña",
                 style: TextStyle(
                     fontSize: 25,
-                    color: colBlueGray,
+                    color: col_blue_gray,
                     fontFamily: "GoogleSans")),
             Text(
               "Se enviara un correo para cambiar tu contraseña",
-              style: TextStyle(color: colBlueGray, fontFamily: "GoogleSans"),
+              style: TextStyle(color: col_blue_gray, fontFamily: "GoogleSans"),
             ),
             Container(
               width: 300,
@@ -56,7 +56,7 @@ class Recuperar extends StatelessWidget {
                 height: 40.0,
                 elevation: 5,
                 onPressed: () {},
-                color: colPrimary,
+                color: col_primary,
                 child: Text(
                   'Enviar',
                   style: TextStyle(color: Colors.white),

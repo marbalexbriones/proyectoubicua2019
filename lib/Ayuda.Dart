@@ -33,7 +33,7 @@ class AyudaState extends State<Ayuda> {
                   child: Text(
                       "Aqui va la ayudaaaaaa",
                       style: TextStyle(
-                          color: colBlueGray,
+                          color: col_blue_gray,
                           fontSize: 20,
                           fontFamily: 'GoogleSans'),
                       textAlign: TextAlign.center)),

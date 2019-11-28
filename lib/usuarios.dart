@@ -79,8 +79,8 @@ class Usuarios extends StatelessWidget {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => AniadirSubCuenta()));
         },
-        splashColor: colPrimary,
-        backgroundColor: colPrimary,
+        splashColor: col_primary,
+        backgroundColor: col_primary,
         elevation: 3,
       ),
     );
@@ -129,7 +129,7 @@ Widget userCard(String imagen, String nombre, BuildContext context, int id) =>
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Inicio()));
                 },
-                color: colPrimary,
+                color: col_primary,
                 child: Text(
                   'Seleccionar',
                   style: TextStyle(color: Colors.white),
