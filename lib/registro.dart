@@ -13,13 +13,14 @@ class Registro extends StatefulWidget {
 }
 
 class RegistroState extends State<Registro> {
-  TextEditingController nameEditingController = TextEditingController(); // para capturar datos
-  TextEditingController lnameEditingController = TextEditingController(); 
-  TextEditingController emailEditingController = TextEditingController(); 
-  TextEditingController passEditingController = TextEditingController(); 
-  TextEditingController pass2EditingController = TextEditingController(); 
-  TextEditingController mobileEditingController = TextEditingController(); 
-  TextEditingController ageEditingController = TextEditingController(); 
+  TextEditingController nameEditingController =
+      TextEditingController(); // para capturar datos
+  TextEditingController lnameEditingController = TextEditingController();
+  TextEditingController emailEditingController = TextEditingController();
+  TextEditingController passEditingController = TextEditingController();
+  TextEditingController pass2EditingController = TextEditingController();
+  TextEditingController mobileEditingController = TextEditingController();
+  TextEditingController ageEditingController = TextEditingController();
 
   final _formKay = GlobalKey<FormState>();
   int _radioValue1 = -1;
@@ -27,156 +28,160 @@ class RegistroState extends State<Registro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Registro"), backgroundColor: col_primary,),
+        appBar: AppBar(
+          title: Text("Registro"),
+          backgroundColor: col_primary,
+        ),
         body: Form(
           key: _formKay,
           child: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(50.0, 100.0, 50.0, 0.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Center(
-                    child: Text("Iniciar Sesión",
+                padding: EdgeInsets.fromLTRB(50.0, 100.0, 50.0, 0.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Center(
+                        child: Text(
+                      "Iniciar Sesión",
                       style: TextStyle(
-                        color: col_blue_gray,
-                        fontSize: 25,
-                        fontFamily: 'GoogleSans'),
+                          color: col_blue_gray,
+                          fontSize: 25,
+                          fontFamily: 'GoogleSans'),
                     )),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    child: TextFormField(
-                      validator: validateName,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Nombre",
-                        hintText: "Ej. Juan",
-                      ),
-                      controller: nameEditingController,
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    child: TextFormField(
-                      validator: validateLName,
-                      controller: lnameEditingController,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Apellido",
-                        hintText: "Ej. Peres",
+                    Container(
+                      padding: EdgeInsets.only(bottom: 5.0),
+                      child: TextFormField(
+                        validator: validateName,
+                        decoration: InputDecoration(
+                          labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                          labelText: "Nombre",
+                          hintText: "Ej. Juan",
+                        ),
+                        controller: nameEditingController,
                       ),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    child: TextFormField(
-                      validator: validateEmail,
-                      controller: emailEditingController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Correo",
-                        hintText: "correo@ejemplo.com",
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    child: TextFormField(
-                      validator: validateNumber,
-                      controller: mobileEditingController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Telefono",
-                        hintText: "1234567890",
-                      ),
-                    ),
-                  ),
-                  Text(
-                    "Genero",
-                    style: TextStyle(
-                    color: col_blue_gray,
-                    fontSize: 20,
-                    fontFamily: 'GoogleSans'),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      new Radio(
-                        value: 0,
-                        groupValue: _radioValue1,
-                        onChanged: _handleRadioValueChange1,
-                      ),
-                      new Text(
-                        'Masculino',
-                        style: new TextStyle(fontSize: 16.0),
-                      ),
-                      new Radio(
-                        value: 1,
-                        groupValue: _radioValue1,
-                        onChanged: _handleRadioValueChange1,
-                      ),
-                      new Text(
-                        'Femenino',
-                        style: new TextStyle(
-                          fontSize: 16.0,
+                    Container(
+                      padding: EdgeInsets.only(bottom: 5.0),
+                      child: TextFormField(
+                        validator: validateLName,
+                        controller: lnameEditingController,
+                        decoration: InputDecoration(
+                          labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                          labelText: "Apellido",
+                          hintText: "Ej. Peres",
                         ),
                       ),
-                    ],
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    child: TextFormField(
-                      validator: validateAge,
-                      controller: ageEditingController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Edad",
-                        hintText: "0 - 100",
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(bottom: 5.0),
+                      child: TextFormField(
+                        validator: validateEmail,
+                        controller: emailEditingController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                          labelText: "Correo",
+                          hintText: "correo@ejemplo.com",
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5.0),
-                    child: TextFormField(
-                      validator: validatePassword,
-                      controller: passEditingController,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Contraseña",
+                    Container(
+                      padding: EdgeInsets.only(bottom: 5.0),
+                      child: TextFormField(
+                        validator: validateNumber,
+                        controller: mobileEditingController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                          labelText: "Telefono",
+                          hintText: "1234567890",
+                        ),
                       ),
-                      obscureText: true,
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 10.0),
-                    child: TextFormField(
-                      validator: validatePassword,
-                      controller: pass2EditingController,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: "GoogleSans"),
-                        labelText: "Repetir contraseña",
+                    Container(
+                      padding: EdgeInsets.only(top: 5.0),
+                      child: Text(
+                        "Genero",
+                        style:
+                            TextStyle(fontSize: 15, fontFamily: 'GoogleSans'),
                       ),
-                      obscureText: true,
                     ),
-                  ),
-                  MaterialButton(
-                    elevation: 5,
-                    onPressed: _createUser,
-                    color: col_primary,
-                    child: Text(
-                      'Registrarse',
-                      style: TextStyle(color: Colors.white),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        new Radio(
+                          value: 0,
+                          groupValue: _radioValue1,
+                          onChanged: _handleRadioValueChange1,
+                        ),
+                        new Text(
+                          'Masculino',
+                          style: new TextStyle(fontSize: 16.0),
+                        ),
+                        new Radio(
+                          value: 1,
+                          groupValue: _radioValue1,
+                          onChanged: _handleRadioValueChange1,
+                        ),
+                        new Text(
+                          'Femenino',
+                          style: new TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              )
-            ),
+                    Container(
+                      padding: EdgeInsets.only(bottom: 5.0),
+                      child: TextFormField(
+                        validator: validateAge,
+                        controller: ageEditingController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                          labelText: "Edad",
+                          hintText: "0 - 100",
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(bottom: 5.0),
+                      child: TextFormField(
+                        validator: validatePassword,
+                        controller: passEditingController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                          labelText: "Contraseña",
+                        ),
+                        obscureText: true,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(bottom: 10.0),
+                      child: TextFormField(
+                        validator: validatePassword,
+                        controller: pass2EditingController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          labelStyle: TextStyle(fontFamily: "GoogleSans"),
+                          labelText: "Repetir contraseña",
+                        ),
+                        obscureText: true,
+                      ),
+                    ),
+                    MaterialButton(
+                      elevation: 5,
+                      onPressed: _createUser,
+                      color: col_primary,
+                      child: Text(
+                        'Registrarse',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                )),
           ),
         ));
   }
@@ -198,17 +203,15 @@ class RegistroState extends State<Registro> {
     });
   }
 
-  void _createUser () async {
-    if(!_formKay.currentState.validate()){
-      Scaffold.of(context).showSnackBar(
-        SnackBar(content: Text("Procesing data"))
-      );
-    }
-    else {
+  void _createUser() async {
+    if (!_formKay.currentState.validate()) {
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text("Procesing data")));
+    } else {
       // Si no existe
-      List<User> lista=  await PastilleroDataBaseProvider.db.getAllUsers();
+      List<User> lista = await PastilleroDataBaseProvider.db.getAllUsers();
       User s = new User(
-        idUser:lista.length+1,
+        idUser: lista.length + 1,
         name: nameEditingController.text,
         lname: lnameEditingController.text,
         email: emailEditingController.text,
@@ -216,7 +219,7 @@ class RegistroState extends State<Registro> {
         mobile: mobileEditingController.text,
         gender: _gender,
         age: ageEditingController.text,
-        parent_id: lista.length+1,
+        parent_id: lista.length + 1,
       );
       //si no existe, entonces
       // If () ... { }
@@ -231,8 +234,7 @@ class RegistroState extends State<Registro> {
   String validatePassword(String value) {
     if (value.length < 8) {
       return 'La contraseña debe tener 8 caracteres mínimo';
-    }
-    else {
+    } else {
       return null;
     }
   }
@@ -240,16 +242,15 @@ class RegistroState extends State<Registro> {
   String validateNumber(String value) {
     if (value.length != 10) {
       return 'El número debe tener 10 digitos';
-    }
-    else {
+    } else {
       return null;
     }
   }
+
   String validateName(String value) {
     if (value.length == 0) {
       return 'Ingresa un nombre';
-    }
-    else {
+    } else {
       return null;
     }
   }
@@ -257,16 +258,15 @@ class RegistroState extends State<Registro> {
   String validateLName(String value) {
     if (value.length == 0) {
       return 'Ingresa un apellido';
-    }
-    else {
+    } else {
       return null;
     }
   }
+
   String validateAge(String value) {
     if (!(int.parse(value) >= 0 || int.parse(value) <= 100)) {
       return 'La edad debe estar entre 0 y 100 años';
-    }
-    else {
+    } else {
       return null;
     }
   }
@@ -277,10 +277,8 @@ class RegistroState extends State<Registro> {
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value)) {
       return 'Verifica tus datos';
-    }
-    else {
+    } else {
       return null;
     }
   }
 }
-

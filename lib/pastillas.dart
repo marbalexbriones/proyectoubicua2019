@@ -65,14 +65,14 @@ class _MyPastillaState extends State<Pastillas> {
       print("onIosSettingRegistered");
     });
     firebaseMessaging.getToken().then((token) {
-      print(token);
+      print("Token = " + token);
       update(token);
     });
   }
 
   showNotification(Map<String, dynamic> msg) async {
     var android =
-        new AndroidNotificationDetails("1", "pills", "channelDescription");
+        new AndroidNotificationDetails("1", "pills", "channelDescription", color: col_primary);
     var iOS = new IOSNotificationDetails();
     var platform = new NotificationDetails(android, iOS);
 
@@ -84,7 +84,7 @@ class _MyPastillaState extends State<Pastillas> {
     });
 
     await flutterLocalNotificationsPlugin.show(
-        0, "${body.keys}", "${body.values}", platform);
+        0, "Es hora de tomar alguna pastilla.", "Ve al inicio para comprobar", platform);
   }
 
   //fcm-token firebase cloud messagin
@@ -115,6 +115,7 @@ class _MyPastillaState extends State<Pastillas> {
                           itemCount: snapshot.data.length,
                           itemBuilder: (BuildContext context, int index) {
                             Reminder item = snapshot.data[index];
+                            print(item.regTime.toString());
 
                             //delete one register for id
                             return Dismissible(
@@ -132,7 +133,7 @@ class _MyPastillaState extends State<Pastillas> {
                                     item.quantityAva,
                                     item.idReminder,
                                     context,
-                                    item));
+                                    item, mytoken));
                           },
                         );
                       } else {
@@ -170,7 +171,7 @@ Widget customCard(
         String restantes,
         int idPastilla,
         BuildContext context,
-        Reminder reminder) =>
+        Reminder reminder, String token) =>
     Padding(
       padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
       child: Center(
@@ -217,7 +218,7 @@ Widget customCard(
                             reminder.regTime, int.parse(reminder.frequency));
                         reminder.quantityAva = rest.toString();
                         reminder.regTime = new DateTime.now().toString();
-                        sendPush(reminder);
+                        sendPush(reminder, token);
                         PastilleroDataBaseProvider.db.updateReminder(reminder);
                         Navigator.pop(context);
                         Navigator.push(
@@ -315,20 +316,20 @@ setAlarm(String time, int lapse) {
       toastLength: Toast.LENGTH_SHORT);
 }
 
-sendPush(Reminder reminder) async {
+sendPush(Reminder reminder, String token) async {
+  User user = await getUser();
   var url = "https://fcm.googleapis.com/fcm/send";
 
   var body = json.encode({
     "notification": {
-      "title": "Es hora de tu medicamento.",
-      "text": "Debes tomarte: ${reminder.medicine}.",
+      "title": "Es hora de un medicamento",
+      "text": " ${user.name} ${user.lname} debe tomar ${reminder.medicine}.",
       "sound": "default",
       "badge": "8",
       "color": "#4BCADB"
     },
     "priority": "high",
-    "to":
-        "cg5tRhyT9Qk:APA91bFFYbFT3V0O6gpJSRtSfmBSyOQ81PaoF9JzEH6jH0AGkTMH6Km1fQUDGpEBXRR-vXQ5UnkZgwwXok98t2BFre7mnpKfJrdPi_8XfoEfe6Qy4KttC3zV97QuCRd594_vNAe5ZeOK"
+    "to":"$token"
   });
 
   Map<String, String> headers = {
